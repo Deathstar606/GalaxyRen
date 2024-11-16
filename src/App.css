@@ -1,0 +1,231 @@
+/*Starts Here*/
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.logo {
+  width: 75px; /* You can adjust the percentage as needed */
+  height: 55px; /* This maintains the image's aspect ratio */
+}
+
+.demo {
+  margin-left: auto;
+}
+
+.nav-c {
+  margin-top: 10px;
+  border-radius: 15px;
+  background-color: transparent;
+  position: fixed;
+  width: 98%;
+  z-index: 9999;
+  transition: background-color 0.3s ease;
+}
+
+.nav-c-scrolled {
+  margin-top: 10px;
+  border-radius: 15px;
+  background-color: rgba(216, 217, 218, 0.8); /* Reduced opacity */
+  position: fixed;
+  width: 98%;
+  z-index: 9999;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.nav-ele {
+  padding: 6px 20px 0px 20px;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  justify-content: center;
+  transition: all ease smooth 0.3s;
+}
+
+.nav-ele:hover {
+  border-bottom: 2px solid #b61414;
+  .nav-sub {
+    opacity: 1;
+    z-index: 99;
+    margin-top: 6px;
+  }
+}
+
+.nav-sub {
+  position: absolute;
+  border-radius: 10px;
+  margin-top: -50px;
+  margin-left: -23px;
+  width: 120px;
+  padding: 10px 0px 10px 0px;
+  background-color: #ffffff;
+  box-shadow: 0 5px 25px #c4c4c4;
+  opacity: 0;
+  z-index: -999;
+  transition: all ease 0.5s;
+}
+
+@media (min-width: 1368px) {
+  .lg-container {
+    max-width: 85%;
+  }
+  .nav-container {
+    max-width: 88.5%;
+  }
+}
+
+.cat-body {
+  position: absolute;
+  bottom: -50%; /* Initial position off screen */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  transition: bottom 0.3s ease;
+  visibility: hidden; /* Initially hidden */
+}
+
+.catcard {
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease; /* Smooth scale transition */
+}
+
+.catcard:hover {
+  transform: scale(1.04); /* Scale on hover */
+}
+
+.catcard:hover .cat-body {
+  bottom: 40%; /* Slide up on hover */
+  visibility: visible; /* Make visible on hover */
+}
+
+.catimg {
+  transition: opacity 0.3s ease;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.catimg:hover {
+  opacity: 0.7; /* Adjust as needed */
+}
+
+
+.modal-back {
+  position: fixed;
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+
+.butt {
+  border: 2px solid #00084c;
+  color: #00084c;
+  border-radius: 15px;
+  background: none;
+  padding: 2px 20px;
+  font-size: 17px;
+  font-family: "montserrat";
+  cursor: pointer;
+  margin: 5px;
+  transition: 0.8s;
+  position: relative;
+  overflow: hidden;
+}
+
+.butt:hover {
+  color: #d8d9da;
+  background-color: #00084c;
+  border-color: #00084c
+}
+
+.home-butt .butt {
+  border: 3px solid #003399; /* Example of modification */
+  color: #003399;
+  background: #f2f2f2;
+  padding: 5px 25px;
+  font-size: 18px;
+}
+
+.home-butt .butt:hover {
+  color: #ffffff;
+  background-color: #003399;
+  border-color: #003399;
+}
+
+.butt::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  z-index: -1;
+  transition: 0.8s;
+}
+
+.jumbotron {
+  height: 100vh; 
+  padding:120px 0px 100px 0px;
+  background-color: #353839;
+  margin:0px auto;
+  color: #F1593A;
+}
+
+.section-hero-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.headerdec {
+  text-decoration:underline;
+  text-decoration-thickness: 2px;
+  text-decoration-color: #F1593A;
+}
+
+.animeY {
+  display: block;
+  transform: translateY(100px);
+  opacity: 0;
+}
+
+.animeX {
+  display: block;
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+.animeZ {
+  display: block;
+  transform: translateY(-100px);
+  opacity: 0;
+}
+
+.swiper-pagination {
+  padding-bottom: 30px;
+}
+
+.swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: rgba(34, 0, 205, 0.8);
+  opacity: 1;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: rgb(34, 0, 205);
+}
+
+.custom-pagination-bullet {
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.custom-pagination-bullet:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
