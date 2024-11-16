@@ -4,8 +4,8 @@ body {
 }
 
 .logo {
-  width: 75px; /* You can adjust the percentage as needed */
-  height: 55px; /* This maintains the image's aspect ratio */
+  width: 110px; /* You can adjust the percentage as needed */
+  height: 110px; /* This maintains the image's aspect ratio */
 }
 
 .demo {
@@ -13,24 +13,16 @@ body {
 }
 
 .nav-c {
-  margin-top: 10px;
-  border-radius: 15px;
-  background-color: transparent;
   position: fixed;
   width: 98%;
   z-index: 9999;
-  transition: background-color 0.3s ease;
 }
 
-.nav-c-scrolled {
-  margin-top: 10px;
-  border-radius: 15px;
-  background-color: rgba(216, 217, 218, 0.8); /* Reduced opacity */
-  position: fixed;
-  width: 98%;
-  z-index: 9999;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+.nav-suffer {
+  padding: 15px;
+  background-color: rgba(216, 217, 218, 0.8);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  border-radius: 15px;
 }
 
 .nav-ele {

@@ -8,7 +8,7 @@ import {
 } from 'reactstrap';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import logo from "../images/IG.jpg";
+import logo from "../images/GALAXY_WEBSITE_Transparent.svg";
 /* import Burger from './Burger'; */
 import MediaQuery from 'react-responsive';
 
@@ -103,7 +103,7 @@ import MediaQuery from 'react-responsive';
   );
 } */
 
-const Navbar = ({ className }) => {
+const Navbar = () => {
 
   const navigate = useNavigate(); // Replaces useHistory
   const location = useLocation();
@@ -143,8 +143,8 @@ const Navbar = ({ className }) => {
   }
 
   return (
-    <Container className='nav-container d-flex justify-content-center'>
-      <div className={`${className}`}>
+    <Container className='d-flex justify-content-center'>
+      <div className="nav-c">
 {/*         <MediaQuery maxWidth={639}>
           <BootstrapNavbar light expand="md">
               <NavbarBrand href="/" className='text-white'><img className='logo' src={logo}/></NavbarBrand>
@@ -162,7 +162,7 @@ const Navbar = ({ className }) => {
         <MediaQuery minWidth={640}>
           <BootstrapNavbar light expand="md">
             <NavbarBrand href="/"><img className='logo' src={logo}/></NavbarBrand>
-            <Nav className="ml-auto" navbar>
+            <Nav className="ml-auto nav-suffer">
               <NavItem className='nav-ele'>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
