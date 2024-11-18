@@ -7,7 +7,6 @@ import {
   Container,
 } from 'reactstrap';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
 import logo from "../images/GALAXY_WEBSITE_Transparent.svg";
 /* import Burger from './Burger'; */
 import MediaQuery from 'react-responsive';
@@ -169,6 +168,22 @@ const Navbar = () => {
                   to="/home/contactus"
                 >
                   Contact Us
+                </Link>
+              </NavItem>
+              <NavItem className='nav-ele'>
+                <Link
+                  style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
+                  to="/"
+                >
+                  Free Estimation
+                </Link>
+              </NavItem>
+              <NavItem className='nav-ele'>
+                <Link
+                  style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
+                  to="/"
+                >
+                  Rent Tool
                 </Link>
               </NavItem>
               <NavItem className='nav-ele'>

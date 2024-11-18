@@ -5,6 +5,7 @@ import Service from './Services';
 import Testi from './Testimonial';
 import About from './AboutUs';
 import AppointmentForm from './Appointment';
+import Estimation from './Estimation';
 import CatDeat from './CatDeats';
 import Footer from './Footer';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
@@ -44,7 +45,7 @@ const Main = (props) => {
   }, []);
 
   return (
-    <div /* style={{backgroundColor: "#d8d9da"}} */>
+    <div>
       <Example/>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.key}>
