@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.css": "/GalaxyRen/static/css/main.78bb1a38.css",
-    "main.js": "/GalaxyRen/static/js/main.5a47d2bc.js",
+    "main.css": "/GalaxyRen/static/css/main.cfc62d1e.css",
+    "main.js": "/GalaxyRen/static/js/main.23856550.js",
     "static/js/787.7815d080.chunk.js": "/GalaxyRen/static/js/787.7815d080.chunk.js",
+    "static/media/GALAXY_WEBSITE_Transparent.svg": "/GalaxyRen/static/media/GALAXY_WEBSITE_Transparent.0b9184e298b46ba1c98938aaeba62f15.svg",
     "static/media/pantrepair.jpg": "/GalaxyRen/static/media/pantrepair.6af84e8cfde5be3bf31d.jpg",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/GalaxyRen/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
-    "static/media/IG.jpg": "/GalaxyRen/static/media/IG.8e2fbbbb3c4b45a50185.jpg",
     "static/media/1695810787-img2-banner-blog-1a.jpg": "/GalaxyRen/static/media/1695810787-img2-banner-blog-1a.0dde989631ee00549df7.jpg",
     "static/media/demo.jpg": "/GalaxyRen/static/media/demo.eeb3fa93e4ac26be82eb.jpg",
     "static/media/hero-image.fill.size_1248x702.v1703441414.jpg": "/GalaxyRen/static/media/hero-image.fill.size_1248x702.v1703441414.f43dae6fd9c6e802acc2.jpg",
@@ -21,12 +21,12 @@
     "static/media/afterp.jpg": "/GalaxyRen/static/media/afterp.d903c72f63d748884f25.jpg",
     "static/media/beforep.jpg": "/GalaxyRen/static/media/beforep.0df795ae218d9142bf07.jpg",
     "index.html": "/GalaxyRen/index.html",
-    "main.78bb1a38.css.map": "/GalaxyRen/static/css/main.78bb1a38.css.map",
-    "main.5a47d2bc.js.map": "/GalaxyRen/static/js/main.5a47d2bc.js.map",
+    "main.cfc62d1e.css.map": "/GalaxyRen/static/css/main.cfc62d1e.css.map",
+    "main.23856550.js.map": "/GalaxyRen/static/js/main.23856550.js.map",
     "787.7815d080.chunk.js.map": "/GalaxyRen/static/js/787.7815d080.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.78bb1a38.css",
-    "static/js/main.5a47d2bc.js"
+    "static/css/main.cfc62d1e.css",
+    "static/js/main.23856550.js"
   ]
 }
