@@ -198,6 +198,7 @@ const Navbar = () => {
                 <div style={{ color: "black", fontSize: "18px", fontWeight: "500", cursor: "pointer" }}>Services</div>
                 <ul className='nav-sub' style={{ listStyleType: 'none', cursor: "pointer" }}>
                   <li className='ml-2'><Link to="/home/cat">Paint Repair</Link></li>
+                  <li className='ml-2'><Link to="/home/subcat">Bathroom</Link></li>
                   <li className='ml-2'>Exhaust Fan</li>
                 </ul>
               </NavItem>

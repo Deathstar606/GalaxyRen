@@ -7,6 +7,7 @@ import About from './AboutUs';
 import AppointmentForm from './Appointment';
 import Estimation from './Estimation';
 import CatDeat from './CatDeats';
+import SubCat from './CategoryWSub';
 import Footer from './Footer';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -37,6 +38,10 @@ const Categories = () => {
   return <CatDeat />;
 };
 
+const CategoriesWsub = () => {
+  return <SubCat />;
+};
+
 const Main = (props) => {
   const location = useLocation();
 
@@ -51,6 +56,7 @@ const Main = (props) => {
         <Routes location={location} key={location.key}>
           <Route path="/home" element={<Home />} />
           <Route path="/home/cat" element={<Categories />} />
+          <Route path="/home/subcat" element={<CategoriesWsub />} />
           <Route path="/home/aboutus" element={<About />} />
           <Route path="/home/contactus" element={<AppointmentForm />} />
           <Route path="*" element={<Navigate to="/home" />} />
