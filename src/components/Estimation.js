@@ -4,7 +4,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button
+  Row,
+  Col,
+  Container
 } from 'reactstrap';
 
 const Estimation = () => {
@@ -43,53 +45,58 @@ const Estimation = () => {
   const subtotal = selectedServices.reduce((sum, service) => sum + service.price, 0);
 
   return (
-    <div className="p-3">
-      <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-        <DropdownToggle caret color="primary">
-          Select Service
-        </DropdownToggle>
-        <DropdownMenu>
-          {services.map((service) =>
-            service.subcategories ? (
-              <React.Fragment key={service.id}>
-                <DropdownItem header>{service.label}</DropdownItem>
-                {service.subcategories.map((sub) => (
-                  <DropdownItem key={sub.id} onClick={() => handleSelectService(sub)}>
-                    {sub.label} - ${sub.price}
+    <Container style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <div>
+      <h1 className='text-center p-5'>Get A Free Estimation of Our Services</h1>
+      <Row style={{ border: "1px solid black", borderRadius: "15px", padding: "20px"}}>
+        <Col md={6}>
+          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+            <DropdownToggle caret className='butt'>
+              Select Service 
+            </DropdownToggle>
+            <DropdownMenu>
+              {services.map((service) =>
+                service.subcategories ? (
+                  <React.Fragment key={service.id}>
+                    <DropdownItem header>{service.label}</DropdownItem>
+                    {service.subcategories.map((sub) => (
+                      <DropdownItem key={sub.id} onClick={() => handleSelectService(sub)}>
+                        {sub.label} - ${sub.price}
+                      </DropdownItem>
+                    ))}
+                  </React.Fragment>
+                ) : (
+                  <DropdownItem key={service.id} onClick={() => handleSelectService(service)}>
+                    {service.label} - ${service.price}
                   </DropdownItem>
-                ))}
-              </React.Fragment>
+                )
+              )}
+            </DropdownMenu>
+          </Dropdown>
+          <div className="mt-3">
+            <h5>Selected Services:</h5>
+            {selectedServices.length > 0 ? (
+              selectedServices.map((service) => (
+                <div key={service.id} className="d-flex align-items-center">
+                  <span>{service.label} - ${service.price}</span>
+                  <span
+                    className="ml-2"
+                    onClick={() => handleRemoveService(service.id)}>
+                        ❌
+                  </span>
+                </div>
+              ))
             ) : (
-              <DropdownItem key={service.id} onClick={() => handleSelectService(service)}>
-                {service.label} - ${service.price}
-              </DropdownItem>
-            )
-          )}
-        </DropdownMenu>
-      </Dropdown>
-
-      {/* Selected Services */}
-      <div className="mt-3">
-        <h5>Selected Services:</h5>
-        {selectedServices.length > 0 ? (
-          selectedServices.map((service) => (
-            <div key={service.id} className="d-flex align-items-center">
-              <span>{service.label} - ${service.price}</span>
-              <span
-                className="ml-2"
-                onClick={() => handleRemoveService(service.id)}>
-                    ❌
-              </span>
-            </div>
-          ))
-        ) : (
-          <p>No services selected.</p>
-        )}
+              <p>No services selected.</p>
+            )}
+          </div>
+        </Col>
+        <Col md={6} style={{display: "flex", alignItems: "center"}}>
+          <h5 className="mt-3">Subtotal: ${subtotal}</h5>
+        </Col>
+      </Row>
       </div>
-
-      {/* Subtotal */}
-      <h5 className="mt-3">Subtotal: ${subtotal}</h5>
-    </div>
+    </Container>
   );
 };
 

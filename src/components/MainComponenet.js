@@ -3,6 +3,7 @@ import Example from './Navbar';
 import HeroSec from './HeroSec';
 import Service from './Services';
 import Testi from './Testimonial';
+import HomeD from './HomeDepot';
 import About from './AboutUs';
 import AppointmentForm from './Appointment';
 import Estimation from './Estimation';
@@ -28,9 +29,10 @@ const Home = () => (
   initial = {{x: 1000, opacity: 0}}
   animate= {{x: 0, opacity: 1}}
   exit= {{x: -1000, opacity: 0}}>
-    <HeroSec />
+    <Estimation/>
+{/*     <HeroSec />
     <Service />
-    <Testi/>
+    <Testi/> */}
   </motion.div>
 );
 
@@ -55,6 +57,7 @@ const Main = (props) => {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.key}>
           <Route path="/home" element={<Home />} />
+          <Route path="/home/homed" element={<HomeD />} />
           <Route path="/home/cat" element={<Categories />} />
           <Route path="/home/subcat" element={<CategoriesWsub />} />
           <Route path="/home/aboutus" element={<About />} />

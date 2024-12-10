@@ -221,3 +221,7 @@ body {
 .custom-pagination-bullet:hover {
   background-color: rgba(255, 255, 255, 0.8);
 }
+
+.swiper-button-prev {
+  display: none; /* Hides the previous button */
+}
