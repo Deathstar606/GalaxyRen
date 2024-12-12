@@ -29,10 +29,9 @@ const Home = () => (
   initial = {{x: 1000, opacity: 0}}
   animate= {{x: 0, opacity: 1}}
   exit= {{x: -1000, opacity: 0}}>
-    <Estimation/>
-{/*     <HeroSec />
+    <HeroSec />
     <Service />
-    <Testi/> */}
+    <Testi/>
   </motion.div>
 );
 
@@ -58,6 +57,7 @@ const Main = (props) => {
         <Routes location={location} key={location.key}>
           <Route path="/home" element={<Home />} />
           <Route path="/home/homed" element={<HomeD />} />
+          <Route path="/home/est" element={<Estimation />} />
           <Route path="/home/cat" element={<Categories />} />
           <Route path="/home/subcat" element={<CategoriesWsub />} />
           <Route path="/home/aboutus" element={<About />} />

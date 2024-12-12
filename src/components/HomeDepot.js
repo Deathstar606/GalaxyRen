@@ -1,6 +1,7 @@
 import React from "react";
 import { CardImg, Container, Row, Col } from "reactstrap";
 import { motion } from "framer-motion";
+import { StaggeredText } from "./TextAnimate";
 import Head from "../images/HomeD/hero-image.fill.size_1248x702.v1703441414.jpg"
 import Tool from "../images/HomeD/0535586_cordless-drill-machine-cd144v.jpeg"
 import icon1 from "../images/HomeD/location.png"
@@ -13,6 +14,36 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 function HomeD () {
+    let id = 10;
+
+    const feats = Array.from({ length: id }, (_, ind) => {
+        return (
+            <SwiperSlide
+                key={ind} // Add a unique key for each element
+                style={{
+                    border: "2px solid #ccc",
+                    borderRadius: "15px",
+                    overflow: "hidden",
+                    padding: "10px",
+                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
+                }}
+            >
+                <CardImg src={Tool}></CardImg>
+                <p className="mt-3">short description {ind}</p>
+                <div
+                    className="butt"
+                    style={{
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                        overflow: "hidden"
+                    }}
+                >
+                    Check pricing & availability
+                </div>
+            </SwiperSlide>
+        );
+    });
+
     return (
         <motion.div
         className="pb-5"
@@ -35,35 +66,29 @@ function HomeD () {
             </h1>
         </div>
         </div>
-          <h1 className="text-center mt-4">Rent a Tool</h1>
+          <h1 className="text-center mt-4"><StaggeredText text={"Rent a Tool"}/></h1>
           <h6 className="text-center pb-4 mb-4">Sub Heading for Tool Rental</h6>
           <Container style={{maxWidth: "80%"}}>
             <Row className="pt-4 mt-4">
                 <Col md={4} className="d-flex justify-content-center">
                     <div>
-                        <CardImg src={icon3} style={{maxWidth: "250px"}}></CardImg>
-                        <ul className="mt-4">
-                            <li>sub pointer 1</li>
-                            <li>sub pointer 2</li>
-                        </ul>
+                        <CardImg src={icon3} style={{width: "150px"}}></CardImg>
+                        <p className="text-center m-0 pt-4">sub pointer 1</p>
+                        <p className="text-center">sub pointer 2</p>
                     </div>
                 </Col>
                 <Col md={4} className="d-flex justify-content-center">
                     <div>
-                        <CardImg src={icon2} style={{maxWidth: "250px"}}></CardImg>
-                        <ul className="mt-4">
-                            <li>sub pointer 1</li>
-                            <li>sub pointer 2</li>
-                        </ul>
+                        <CardImg src={icon2} style={{width: "150px"}}></CardImg>
+                        <p className="text-center m-0 pt-4">sub pointer 1</p>
+                        <p className="text-center">sub pointer 2</p>
                     </div>
                 </Col>
                 <Col md={4} className="d-flex justify-content-center">
                     <div>
-                        <CardImg src={icon1} style={{maxWidth: "250px"}}></CardImg>
-                        <ul className="mt-4">
-                            <li>sub pointer 1</li>
-                            <li>sub pointer 2</li>
-                        </ul>
+                        <CardImg src={icon1} style={{width: "150px"}}></CardImg>
+                        <p className="text-center m-0 pt-4">sub pointer 1</p>
+                        <p className="text-center">sub pointer 2</p>
                     </div>
                 </Col>
             </Row>
@@ -76,197 +101,8 @@ function HomeD () {
           modules={[Navigation]}
           navigation
           >
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-            <SwiperSlide style={{
-                border: "2px solid #ccc", 
-                borderRadius: "15px", 
-                overflow: "hidden", 
-                padding: "10px",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
-            }}>
-                <CardImg src={Tool}></CardImg>
-                <p className="mt-3">short description</p>
-                <div 
-                className="butt" 
-                style={{ 
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                    overflow: "hidden"
-                    }}>
-                    Check pricing & availability
-                </div>
-            </SwiperSlide>
-          </Swiper>
+            {feats}    
+          </Swiper>    
         </motion.div>
     )
 }

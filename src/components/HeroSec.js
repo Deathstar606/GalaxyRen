@@ -29,7 +29,7 @@ const HeroSec = () => {
             <div className="d-flex flex-column align-items-center justify-content-center w-100 p-3" style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', textAlign: 'center'}}>
               <h1 className="mb-1 pb-3 text-center" style={{fontSize: "clamp(44px, 4vw, 70px)"}}>This is a demo head</h1>
               <h6 className='mb-3' style={{fontSize: "clamp(18px, 1vw, 40px)"}}>This is a demo sub header</h6>
-              <div className="butt" style={{fontSize: "21px", color: "black"}} /* onClick={handleClick} */>
+              <div className="butt" style={{fontSize: "21px"}} /* onClick={handleClick} */>
                 Demo Button
               </div>
             </div>

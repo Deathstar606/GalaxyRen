@@ -8,6 +8,8 @@ import {
   Col,
   Container
 } from 'reactstrap';
+import { motion } from 'framer-motion';
+import { StaggeredText } from './TextAnimate';
 
 const Estimation = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -45,58 +47,66 @@ const Estimation = () => {
   const subtotal = selectedServices.reduce((sum, service) => sum + service.price, 0);
 
   return (
-    <Container style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <div>
-      <h1 className='text-center p-5'>Get A Free Estimation of Our Services</h1>
-      <Row style={{ border: "1px solid black", borderRadius: "15px", padding: "20px"}}>
-        <Col md={6}>
-          <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
-            <DropdownToggle caret className='butt'>
-              Select Service 
-            </DropdownToggle>
-            <DropdownMenu>
-              {services.map((service) =>
-                service.subcategories ? (
-                  <React.Fragment key={service.id}>
-                    <DropdownItem header>{service.label}</DropdownItem>
-                    {service.subcategories.map((sub) => (
-                      <DropdownItem key={sub.id} onClick={() => handleSelectService(sub)}>
-                        {sub.label} - ${sub.price}
-                      </DropdownItem>
-                    ))}
-                  </React.Fragment>
-                ) : (
-                  <DropdownItem key={service.id} onClick={() => handleSelectService(service)}>
-                    {service.label} - ${service.price}
-                  </DropdownItem>
-                )
+    <motion.div
+    className="pb-5"
+    transition={{duration: 0.5, type: "tween", ease: "easeIn"}}
+    initial = {{x: 1000, opacity: 0}}
+    animate= {{x: 0, opacity: 1}}
+    exit= {{x: -1000, opacity: 0}}>
+      <Container style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div>
+        <h1 className='text-center p-5'><StaggeredText text={"Get A Free Estimation of Our Services"}/></h1>
+        <Row style={{ border: "1px solid grey", borderRadius: "15px", padding: "20px"}}>
+          <Col md={6}>
+            <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
+              <DropdownToggle caret className='butt'>
+                Select Service 
+              </DropdownToggle>
+              <DropdownMenu>
+                {services.map((service) =>
+                  service.subcategories ? (
+                    <React.Fragment key={service.id}>
+                      <DropdownItem header>{service.label}</DropdownItem>
+                      {service.subcategories.map((sub) => (
+                        <DropdownItem key={sub.id} onClick={() => handleSelectService(sub)}>
+                          {sub.label} - ${sub.price}
+                        </DropdownItem>
+                      ))}
+                    </React.Fragment>
+                  ) : (
+                    <DropdownItem key={service.id} onClick={() => handleSelectService(service)}>
+                      {service.label} - ${service.price}
+                    </DropdownItem>
+                  )
+                )}
+              </DropdownMenu>
+            </Dropdown>
+            <div className="mt-3">
+              <h5>Selected Services:</h5>
+              {selectedServices.length > 0 ? (
+                selectedServices.map((service) => (
+                  <div key={service.id} className="d-flex align-items-center">
+                    <span>{service.label} - ${service.price}</span>
+                    <span
+                      className="ml-2"
+                      onClick={() => handleRemoveService(service.id)}>
+                          ❌
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p>No services selected.</p>
               )}
-            </DropdownMenu>
-          </Dropdown>
-          <div className="mt-3">
-            <h5>Selected Services:</h5>
-            {selectedServices.length > 0 ? (
-              selectedServices.map((service) => (
-                <div key={service.id} className="d-flex align-items-center">
-                  <span>{service.label} - ${service.price}</span>
-                  <span
-                    className="ml-2"
-                    onClick={() => handleRemoveService(service.id)}>
-                        ❌
-                  </span>
-                </div>
-              ))
-            ) : (
-              <p>No services selected.</p>
-            )}
-          </div>
-        </Col>
-        <Col md={6} style={{display: "flex", alignItems: "center"}}>
-          <h5 className="mt-3">Subtotal: ${subtotal}</h5>
-        </Col>
-      </Row>
-      </div>
-    </Container>
+            </div>
+          </Col>
+          <Col md={6} style={{display: "flex", alignItems: "center"}}>
+            <h5 className="mt-3">Subtotal: ${subtotal}</h5>
+          </Col>
+        </Row>
+        </div>
+      </Container>
+    </motion.div>
+
   );
 };
 

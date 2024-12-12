@@ -173,7 +173,7 @@ const Navbar = () => {
               <NavItem className='nav-ele'>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
-                  to="/"
+                  to="/home/est"
                 >
                   Free Estimation
                 </Link>
@@ -181,7 +181,7 @@ const Navbar = () => {
               <NavItem className='nav-ele'>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
-                  to="/"
+                  to="/home/homed"
                 >
                   Rent Tool
                 </Link>
