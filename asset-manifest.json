@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/GalaxyRen/static/css/main.cfc62d1e.css",
-    "main.js": "/GalaxyRen/static/js/main.06ab4045.js",
+    "main.css": "/GalaxyRen/static/css/main.2f807dd5.css",
+    "main.js": "/GalaxyRen/static/js/main.4669bcd0.js",
     "static/js/787.7815d080.chunk.js": "/GalaxyRen/static/js/787.7815d080.chunk.js",
     "static/media/GALAXY_WEBSITE_Transparent.svg": "/GalaxyRen/static/media/GALAXY_WEBSITE_Transparent.0b9184e298b46ba1c98938aaeba62f15.svg",
     "static/media/pantrepair.jpg": "/GalaxyRen/static/media/pantrepair.6af84e8cfde5be3bf31d.jpg",
@@ -20,17 +20,18 @@
     "static/media/lightswitch.jpg": "/GalaxyRen/static/media/lightswitch.0b16c6567d57bfeee7dd.jpg",
     "static/media/HandymanServices-Part-3-Image.jpg": "/GalaxyRen/static/media/HandymanServices-Part-3-Image.3dd41bfc1b55925b4107.jpg",
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/GalaxyRen/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/0535586_cordless-drill-machine-cd144v.jpeg": "/GalaxyRen/static/media/0535586_cordless-drill-machine-cd144v.a04962b2cef7e6153e60.jpeg",
     "static/media/lightfixture.webp": "/GalaxyRen/static/media/lightfixture.58fda4f74f5ad21ef5e0.webp",
     "static/media/potlights.webp": "/GalaxyRen/static/media/potlights.27ba13f6b12fb2c4247b.webp",
     "static/media/afterp.jpg": "/GalaxyRen/static/media/afterp.d903c72f63d748884f25.jpg",
     "static/media/beforep.jpg": "/GalaxyRen/static/media/beforep.0df795ae218d9142bf07.jpg",
     "index.html": "/GalaxyRen/index.html",
-    "main.cfc62d1e.css.map": "/GalaxyRen/static/css/main.cfc62d1e.css.map",
-    "main.06ab4045.js.map": "/GalaxyRen/static/js/main.06ab4045.js.map",
+    "main.2f807dd5.css.map": "/GalaxyRen/static/css/main.2f807dd5.css.map",
+    "main.4669bcd0.js.map": "/GalaxyRen/static/js/main.4669bcd0.js.map",
     "787.7815d080.chunk.js.map": "/GalaxyRen/static/js/787.7815d080.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cfc62d1e.css",
-    "static/js/main.06ab4045.js"
+    "static/css/main.2f807dd5.css",
+    "static/js/main.4669bcd0.js"
   ]
 }
