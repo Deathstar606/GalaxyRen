@@ -1,6 +1,10 @@
-import React from "react";
-import { CardImg, Container, Row, Col } from "reactstrap";
-import { motion } from "framer-motion";
+import React, {useState} from "react";
+import { CardImg, Container, Row, Col, Table, 
+    Dropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem, } from "reactstrap";
+import { AnimatePresence, motion } from "framer-motion";
 import { StaggeredText } from "./TextAnimate";
 import Head from "../images/HomeD/hero-image.fill.size_1248x702.v1703441414.jpg"
 import Tool from "../images/HomeD/0535586_cordless-drill-machine-cd144v.jpeg"
@@ -14,6 +18,25 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 function HomeD () {
+    const [modal, setModal] = useState(false);
+    const [duration, setDuration] = useState("not selected");
+    const [pickupMethod, setPickupMethod] = useState("not selected");
+    const [dropdownOpen1, setDropdownOpen1] = useState(false); // State for the first dropdown
+    const [dropdownOpen2, setDropdownOpen2] = useState(false);
+
+    const toggleDropdown1 = () => setDropdownOpen1(!dropdownOpen1);
+    const toggleDropdown2 = () => setDropdownOpen2(!dropdownOpen2);
+
+    const handleShow = () => {
+        setModal(!modal);
+    };
+
+    const handleHide = () => {
+        setModal(!modal);
+        setDuration("not selected")
+        setPickupMethod("not selected")
+    };
+
     let id = 10;
 
     const feats = Array.from({ length: id }, (_, ind) => {
@@ -32,6 +55,7 @@ function HomeD () {
                 <p className="mt-3">short description {ind}</p>
                 <div
                     className="butt"
+                    onClick={handleShow}
                     style={{
                         whiteSpace: "nowrap",
                         textOverflow: "ellipsis",
@@ -102,7 +126,141 @@ function HomeD () {
           navigation
           >
             {feats}    
-          </Swiper>    
+          </Swiper>
+          <AnimatePresence>
+            {modal && (
+                <motion.div
+                className="modal-back"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                >
+                <motion.div
+                    className="d-flex justify-content-center m-5"
+                    initial={{ opacity: 0, y: -500 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -500 }}
+                    transition={{ duration: 0.25, delay: 0.25 }}
+                >
+                    <Container
+                    style={{
+                        minHeight: "50vh",
+                        backgroundColor: "white",
+                        borderRadius: "15px",
+                        padding: "40px",
+                    }}
+                    >
+                    <button
+                        style={{
+                        position: "absolute",
+                        top: "0px",
+                        right: "10px",
+                        background: "transparent",
+                        border: "none",
+                        fontSize: "40px",
+                        color: "white",
+                        cursor: "pointer",
+                        }}
+                        onClick={handleHide}
+                    >
+                        &times;
+                    </button>
+                    <Row>
+                        <Col md={6} className="d-flex align-items-center justify-content-center">
+                            <CardImg src={Tool}/>
+                        </Col>
+                        <Col
+                        md={6}
+                        style={{
+                            border: "1px solid #ccc",
+                            borderRadius: "10px",
+                            padding: "15px",
+                        }}
+                        >
+                        <h3>Description Heading</h3>
+                        <p>A short description goes here, providing brief details about the content.</p>
+                        <Table>
+                            <thead style={{backgroundColor: "gray"}}>
+                            <tr>
+                                <th>Column 1</th>
+                                <th>Column 2</th>
+                                <th>Column 3</th>
+                                <th>Column 4</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Data 1</td>
+                                <td>Data 2</td>
+                                <td>Data 3</td>
+                                <td>Data 4</td>
+                            </tr>
+                            <tr>
+                                <td>Data 5</td>
+                                <td>Data 6</td>
+                                <td>Data 7</td>
+                                <td>Data 8</td>
+                            </tr>
+                            </tbody>
+                        </Table>
+                        <div className="d-flex mb-1">
+                            <Dropdown
+                                className="mb-2"
+                                isOpen={dropdownOpen1}
+                                toggle={toggleDropdown1}
+                                >
+                                <DropdownToggle caret className="butt">
+                                    Duration
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem
+                                    onClick={() => setDuration("30 minutes")}
+                                    >
+                                    30 minutes
+                                    </DropdownItem>
+                                    <DropdownItem onClick={() => setDuration("1 hour")}>
+                                    1 hour
+                                    </DropdownItem>
+                                    <DropdownItem onClick={() => setDuration("2 hours")}>
+                                    2 hours
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                            <Dropdown
+                            className="mb-2"
+                            isOpen={dropdownOpen2}
+                            toggle={toggleDropdown2}
+                            >
+                                <DropdownToggle caret className="butt">
+                                    Pickup Method
+                                </DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem onClick={() => setPickupMethod("In-store")}>
+                                    In-store
+                                    </DropdownItem>
+                                    <DropdownItem onClick={() => setPickupMethod("Curbside")}>
+                                    Curbside
+                                    </DropdownItem>
+                                    <DropdownItem onClick={() => setPickupMethod("Delivery")}>
+                                    Delivery
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </Dropdown>
+                        </div>
+                        <div className="ml-2 mt-2">
+                            <p className="text-muted">Duration: {duration}</p>
+                            <p className="text-muted">Pick up method: {pickupMethod}</p>
+                        </div>
+                        <div className="butt" style={{display: "inline-block"}}>
+                            Request Reservation
+                        </div>
+                        </Col>
+                    </Row>
+                    </Container>
+                </motion.div>
+                </motion.div>
+                )}
+            </AnimatePresence>      
         </motion.div>
     )
 }
