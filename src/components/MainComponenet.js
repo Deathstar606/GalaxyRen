@@ -5,6 +5,7 @@ import Service from './Services';
 import Testi from './Testimonial';
 import HomeD from './HomeDepot';
 import About from './AboutUs';
+import TestAnimation from './TestAnimation';
 import AppointmentForm from './Appointment';
 import Estimation from './Estimation';
 import CatDeat from './CatDeats';
@@ -31,6 +32,7 @@ const Home = () => (
   exit= {{x: -1000, opacity: 0}}>
     <HeroSec />
     <Service />
+    <TestAnimation />
     <Testi/>
   </motion.div>
 );
