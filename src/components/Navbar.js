@@ -161,7 +161,7 @@ const Navbar = () => {
         <MediaQuery minWidth={640}>
           <BootstrapNavbar light expand="md">
             <NavbarBrand href="/"><img className='logo' src={logo}/></NavbarBrand>
-            <Nav className="ml-auto nav-suffer">
+            <Nav className="ml-auto">
               <NavItem className='nav-ele'>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
