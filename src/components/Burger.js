@@ -1,37 +1,147 @@
-import React from 'react';
-import { Container, Row, Col } from 'reactstrap';
-import { stack as Menu } from 'react-burger-menu'
-import { Link } from 'react-scroll';
-import "./Burger.css"
+import React, { useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { FaFacebook } from "react-icons/fa";
+import { FaWhatsapp } from "react-icons/fa";
+import './Burger.css';
 
-class Burger extends React.Component {
-  showSettings (event) {
-    event.preventDefault();
-  }
+const BurgerMenu = () => {
+  const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  render () {
-    // NOTE: You also need to provide styles, see https://github.com/negomi/react-burger-menu#styling
-    return (
-      <Menu right>
-        <Container>
-          <Row>
-            <Col>
-              <a id="home" href="/">Home</a>
-            </Col>
-            <Col>
-              <a id="contact"  href="/contact">Contact</a>
-            </Col>
-            <Col >
-            <Link to="aboutus" spy={true} smooth={true} offset={-40} duration={500}>About</Link>
-            </Col>
-            <Col >
-              <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
-            </Col>
-          </Row>
-        </Container>
-      </Menu>
-    );
-  }
-}
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
 
-export default Burger
+const [activeLink, setActiveLink] = useState('');
+
+useEffect(() => {
+  setActiveLink(location.pathname);
+}, [location]);
+
+const handleNavLinkClick = (to) => {
+  window.scrollBy({
+    top: window.innerHeight, 
+    behavior: 'smooth', 
+  });
+
+  setTimeout(() => {
+    setActiveLink(to);
+  }, 500); 
+};
+
+  return (
+    <div>
+      <div className="burger-menu">
+        <div className="burger-icon" onClick={toggleMenu}>
+          <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
+          <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
+          <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
+        </div>
+      </div>
+
+      <div className={`menu ${menuOpen ? 'open' : ''}`}>
+        <ul>
+          <div className='d-flex justify-content-center p-1'>
+            <li>
+              <NavLink
+                to="/menu"
+                activeClassName="active"
+                onClick={() => {handleNavLinkClick('/menu'); toggleMenu()}} // Update active link on click
+              >
+                <div className={`burg-menu pr-2 pl-2 ${activeLink === '/menu' ? 'active' : ''}`}>
+                  Menu
+                </div>
+              </NavLink>
+            </li>
+          </div>
+          <div className='d-flex justify-content-center'>
+            <li>
+              <NavLink
+                to="/location"
+                activeClassName="active"
+                onClick={() => {handleNavLinkClick('/location'); toggleMenu()}} // Update active link on click
+              >
+                <div className={`burg-menu pr-2 pl-2 ${activeLink === '/location' ? 'active' : ''}`}>
+                  Location
+                </div>
+              </NavLink>
+            </li>
+          </div>
+          <div className='d-flex justify-content-center'>
+            <li>
+              <NavLink
+                to="/events"
+                activeClassName="active"
+                onClick={() => {handleNavLinkClick('/events'); toggleMenu()}} // Update active link on click
+              >
+                <div className={`burg-menu pr-2 pl-2 ${activeLink === '/events' ? 'active' : ''}`}>
+                  Events
+                </div>
+              </NavLink>
+            </li>
+          </div>
+          <div className='d-flex justify-content-center'>
+            <li>
+              <NavLink
+                to="/catering"
+                activeClassName="active"
+                onClick={() => {handleNavLinkClick('/catering'); toggleMenu()}} // Update active link on click
+              >
+                <div className={`burg-menu pr-2 pl-2 ${activeLink === '/catering' ? 'active' : ''}`}>
+                  Catering
+                </div>
+              </NavLink>
+            </li>
+          </div>
+          <div className='d-flex justify-content-center'>
+            <li>
+              <NavLink
+                to="/gift"
+                activeClassName="active"
+                onClick={() => {handleNavLinkClick('/gift'); toggleMenu()}} // Update active link on click
+              >
+                <div className={`burg-menu pr-2 pl-2 ${activeLink === '/gift' ? 'active' : ''}`}>
+                  Gift Cards
+                </div>
+              </NavLink>
+            </li>
+          </div>
+          <div className='d-flex justify-content-center'>
+            <li>
+              <NavLink
+                to="/gallery"
+                activeClassName="active"
+                onClick={() => {handleNavLinkClick('/gallery'); toggleMenu()}} // Update active link on click
+              >
+                <div className={`burg-menu pr-2 pl-2 ${activeLink === '/gallery' ? 'active' : ''}`}>
+                  Gallery
+                </div>
+              </NavLink>
+            </li>
+          </div>
+          <div className='d-flex justify-content-center'>
+            <li>
+              <NavLink
+                to="/aboutus"
+                activeClassName="active"
+                onClick={() => {handleNavLinkClick('/aboutus'); toggleMenu()}} // Update active link on click
+              >
+                <div className={`burg-menu pr-2 pl-2 ${activeLink === '/aboutus' ? 'active' : ''}`}>
+                  About
+                </div>
+              </NavLink>
+            </li>
+          </div>
+          <li className='d-flex justify-content-center pt-4'>
+            <div>
+              <FaFacebook color="rgb(255, 193, 0)" size={40} className='mr-3'/>
+              <FaWhatsapp color="rgb(255, 193, 0)" size={40} className='mr-3'/>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default BurgerMenu;

@@ -41,7 +41,7 @@ function ShowDescription ({ desp, handleHide }) {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.2 }}
         >
-          <Container style={{ position: "absolute", maxWidth: "85%" }}>
+          <Container style={{ position: "absolute", minWidth: "100%" }}>
             <Row className="justify-content-center ml-1 mr-1">
               <Col md={5} className="p-4">
                 <Swiper
@@ -100,7 +100,7 @@ function Service () {
                     <div>
                       <CardImg className="catimg" src={service.head}/>
                       <div className="cat-body">
-                        <div className="butt" style={{fontSize: "21px"}} onClick={() => handleShow(service)}>
+                        <div className="butt" style={{fontSize: "17px"}} onClick={() => handleShow(service)}>
                           Learn More
                         </div>
                       </div>

@@ -5,7 +5,7 @@ import Service from './Services';
 import Testi from './Testimonial';
 import HomeD from './HomeDepot';
 import About from './AboutUs';
-import TestAnimation from './TestAnimation';
+import TestAnimation from './HeroSec';
 import AppointmentForm from './Appointment';
 import Estimation from './Estimation';
 import CatDeat from './CatDeats';
@@ -26,13 +26,14 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Home = () => (
   <motion.div
+  style={{backgroundColor: "#ffffff"}}
   transition={{duration: 0.5, type: "tween", ease: "easeIn"}}
   initial = {{x: 1000, opacity: 0}}
   animate= {{x: 0, opacity: 1}}
   exit= {{x: -1000, opacity: 0}}>
     <HeroSec />
     <Service />
-    <TestAnimation />
+    <Estimation/>
     <Testi/>
   </motion.div>
 );
@@ -59,7 +60,6 @@ const Main = (props) => {
         <Routes location={location} key={location.key}>
           <Route path="/home" element={<Home />} />
           <Route path="/home/homed" element={<HomeD />} />
-          <Route path="/home/est" element={<Estimation />} />
           <Route path="/home/cat" element={<Categories />} />
           <Route path="/home/subcat" element={<CategoriesWsub />} />
           <Route path="/home/aboutus" element={<About />} />
@@ -67,7 +67,6 @@ const Main = (props) => {
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </AnimatePresence>
-
       <Footer/>
     </div>
   );

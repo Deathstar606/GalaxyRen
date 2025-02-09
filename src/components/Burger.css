@@ -1,65 +1,79 @@
-/* Position and sizing of burger button */
-.bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 15px;
-    right: 40px;
-    top: 25px;
-  }
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+}
 
-  /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: darkorange;
-  }
-  
-  /* Color/shape of burger icon bars on hover*/
-  .bm-burger-bars-hover {
-    background: #a90000;
-  }
-  
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    height: 24px;
-    width: 24px;
-  }
-  
-  /* Color/shape of close button cross */
-  .bm-cross {
-    background: #bdc3c7;
-  }
-  
-  /*
-  Sidebar wrapper styles
-  Note: Beware of modifying this element as it can break the animations - you should not need to touch it in most cases
-  */
-  .bm-menu-wrap {
-    position: fixed;
-    height: 100%;
-  }
-  
-  /* General sidebar styles */
-  .bm-menu {
-    background: #373a47;
-    padding: 2.1em 2.1em 0;
-    font-size: 1.65em;
-    font-weight: bold;
-  }
-  
-  /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
-    fill: #373a47;
-  }
-  
-  /* Wrapper for item list */
-  
-  
-  /* Styling of overlay */
-  .bm-overlay {
-    background: rgba(0, 0, 0, 0.3);
-  }
+.burger-menu {
+  z-index: 1000;
+}
 
-  .items {
-    padding: 0.3em;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    color: #a90000;
-  }
+.burger-icon {
+  width: 30px;
+  height: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.burger-icon .bar {
+  width: 100%;
+  height: 3px;
+  background-color: rgb(255, 193, 0);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.burger-icon .bar.open:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+  z-index: 1000;
+}
+
+.burger-icon .bar.open:nth-child(2) {
+  opacity: 0;
+  z-index: 1000;
+}
+
+.burger-icon .bar.open:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+  z-index: 1000;
+}
+
+.menu {
+  position: fixed;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: top 0.5s ease;
+}
+
+.menu ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.menu ul li {
+  margin: 8px 0;
+}
+
+.burg-menu {
+  text-decoration: none;
+  color: rgb(255, 193, 0);
+  font-size: 34px;
+}
+
+.burg-menu.active {
+  color: black;
+  background-color: rgb(255, 193, 0);
+}
+
+.menu.open {
+  top: 0;
+}

@@ -4,8 +4,15 @@ body {
 }
 
 .logo {
-  width: 110px; /* You can adjust the percentage as needed */
-  height: 110px; /* This maintains the image's aspect ratio */
+  width: 150px; /* You can adjust the percentage as needed */
+  height: 150px; /* This maintains the image's aspect ratio */
+}
+
+@media (max-width: 639px) {
+  .logo {
+    width: 85px; /* You can adjust the percentage as needed */
+    height: 85px; /* This maintains the image's aspect ratio */
+  }
 }
 
 .demo {
@@ -13,9 +20,8 @@ body {
 }
 
 .nav-c {
-  position: fixed;
-  width: 98%;
-  z-index: 9999;
+  position: relative;
+  background-color: #ffffff;
 }
 
 .nav-suffer {
@@ -28,7 +34,6 @@ body {
 .nav-ele {
   padding: 6px 20px 0px 20px;
   display: inline-block;
-  text-decoration: none;
   color: inherit;
   justify-content: center;
   transition: all ease smooth 0.3s;
@@ -88,7 +93,7 @@ body {
 }
 
 .catcard:hover .cat-body {
-  bottom: 40%; /* Slide up on hover */
+  bottom: 30%; /* Slide up on hover */
   visibility: visible; /* Make visible on hover */
 }
 

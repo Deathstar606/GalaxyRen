@@ -53,11 +53,11 @@ const Estimation = () => {
     initial = {{x: 1000, opacity: 0}}
     animate= {{x: 0, opacity: 1}}
     exit= {{x: -1000, opacity: 0}}>
-      <Container style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div>
-        <h1 className='text-center p-5'><StaggeredText text={"Get A Free Estimation of Our Services"}/></h1>
-        <Row style={{ border: "1px solid grey", borderRadius: "15px", padding: "20px"}}>
-          <Col md={6}>
+      <Container style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div className='pl-3 pr-3'>
+        <h1 className='text-center p-5'><StaggeredText text={"Get An Estimation of our services"}/></h1>
+        <Row style={{border: "1px solid grey", borderRadius: "15px", padding: "20px"}}>
+          <Col md={6} >
             <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
               <DropdownToggle caret className='butt'>
                 Select Service 
