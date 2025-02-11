@@ -5,7 +5,6 @@ import Service from './Services';
 import Testi from './Testimonial';
 import HomeD from './HomeDepot';
 import About from './AboutUs';
-import TestAnimation from './HeroSec';
 import AppointmentForm from './Appointment';
 import Estimation from './Estimation';
 import CatDeat from './CatDeats';
@@ -14,14 +13,14 @@ import Footer from './Footer';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { connect } from 'react-redux';
-import { fetchCases } from '../redux/ActionCreator';
+import { fetcTools } from '../redux/ActionCreator';
 
 const mapStateToProps = (state) => ({
-  cases: state.cases,
+  tools: state.tools,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchCases: () => dispatch(fetchCases()),
+  fetcTools: () => dispatch(fetcTools()),
 });
 
 const Home = () => (
@@ -50,7 +49,7 @@ const Main = (props) => {
   const location = useLocation();
 
   useEffect(() => {
-    props.fetchCases();
+    props.fetcTools();
   }, []);
 
   return (
@@ -59,7 +58,7 @@ const Main = (props) => {
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.key}>
           <Route path="/home" element={<Home />} />
-          <Route path="/home/homed" element={<HomeD />} />
+          <Route path="/home/homed" element={<HomeD tools={props.tools}/>} />
           <Route path="/home/cat" element={<Categories />} />
           <Route path="/home/subcat" element={<CategoriesWsub />} />
           <Route path="/home/aboutus" element={<About />} />

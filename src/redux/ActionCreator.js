@@ -1,26 +1,39 @@
 import * as ActionTypes from './ActionTypes';
-import { CASES } from '../data/case';
+import { baseUrl } from '../shared/baseurl';
 
-export const fetchCases = () => (dispatch) => {
-    dispatch(casesLoading(true));
+export const fetcTools = () => (dispatch) => {
+    dispatch(toolsLoading(true));
 
-    try {
-        dispatch(addCases(CASES));
-    } catch (error) {
-        dispatch(casesFailed(error.message));
-    }
-};
+    return fetch(baseUrl + 'tools')
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(tools => dispatch(addTools(tools)))
+        .catch(error => dispatch(toolsFailed(error.message)));
+}
 
-export const casesLoading = () => ({
-    type: ActionTypes.CASE_LOADING
+export const toolsLoading = () => ({
+    type: ActionTypes.TOOL_LOADING
 });
 
-export const casesFailed = (errmess) => ({
-    type: ActionTypes.CASE_FAILED,
+export const toolsFailed = (errmess) => ({
+    type: ActionTypes.TOOL_FAILED,
     payload: errmess
 });
 
-export const addCases = (cases) => ({
-    type: ActionTypes.ADD_CASE,
-    payload: cases
+export const addTools = (tools) => ({
+    type: ActionTypes.ADD_TOOL,
+    payload: tools
 });

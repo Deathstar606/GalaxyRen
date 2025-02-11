@@ -64,7 +64,7 @@ const Navbar = () => {
               <NavItem className='nav-ele'>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500", textDecoration: "none" }}
-                  to="/home/contactus"
+                  to="/home/homed"
                 >
                   Rent Tool
                 </Link>
@@ -72,7 +72,7 @@ const Navbar = () => {
               <NavItem className='nav-ele'>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500", textDecoration: "none" }}
-                  to="/home/contactus"
+                  to="/home/aboutus"
                 >
                   About Us
                 </Link>
