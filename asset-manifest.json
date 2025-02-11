@@ -1,15 +1,14 @@
 {
   "files": {
-    "main.css": "/GalaxyRen/static/css/main.2f807dd5.css",
-    "main.js": "/GalaxyRen/static/js/main.bd6c645b.js",
+    "main.css": "/GalaxyRen/static/css/main.5d887bdd.css",
+    "main.js": "/GalaxyRen/static/js/main.8f545346.js",
     "static/js/787.7815d080.chunk.js": "/GalaxyRen/static/js/787.7815d080.chunk.js",
     "static/media/GALAXY_WEBSITE_Transparent.svg": "/GalaxyRen/static/media/GALAXY_WEBSITE_Transparent.0b9184e298b46ba1c98938aaeba62f15.svg",
     "static/media/pantrepair.jpg": "/GalaxyRen/static/media/pantrepair.6af84e8cfde5be3bf31d.jpg",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/GalaxyRen/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/1000_F_588238455_Q6IkVMMaomoWuD66ijiY2sgDPCi2cpPl.jpg": "/GalaxyRen/static/media/1000_F_588238455_Q6IkVMMaomoWuD66ijiY2sgDPCi2cpPl.e47f4e608135bab273c1.jpg",
     "static/media/1695810787-img2-banner-blog-1a.jpg": "/GalaxyRen/static/media/1695810787-img2-banner-blog-1a.0dde989631ee00549df7.jpg",
-    "static/media/demo.jpg": "/GalaxyRen/static/media/demo.eeb3fa93e4ac26be82eb.jpg",
     "static/media/hero-image.fill.size_1248x702.v1703441414.jpg": "/GalaxyRen/static/media/hero-image.fill.size_1248x702.v1703441414.f43dae6fd9c6e802acc2.jpg",
-    "static/media/1000_F_872277172_W2JEB6BdYWdj1leBFEcO8heieBIqaN68.jpg": "/GalaxyRen/static/media/1000_F_872277172_W2JEB6BdYWdj1leBFEcO8heieBIqaN68.bd3744801a37005cdc8c.jpg",
     "static/media/fontawesome-webfont.eot": "/GalaxyRen/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/GalaxyRen/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
     "static/media/premium_photo-1723867291079-0e3a69e7d412.avif": "/GalaxyRen/static/media/premium_photo-1723867291079-0e3a69e7d412.e4a305583409b67c2fa1.avif",
@@ -26,12 +25,12 @@
     "static/media/afterp.jpg": "/GalaxyRen/static/media/afterp.d903c72f63d748884f25.jpg",
     "static/media/beforep.jpg": "/GalaxyRen/static/media/beforep.0df795ae218d9142bf07.jpg",
     "index.html": "/GalaxyRen/index.html",
-    "main.2f807dd5.css.map": "/GalaxyRen/static/css/main.2f807dd5.css.map",
-    "main.bd6c645b.js.map": "/GalaxyRen/static/js/main.bd6c645b.js.map",
+    "main.5d887bdd.css.map": "/GalaxyRen/static/css/main.5d887bdd.css.map",
+    "main.8f545346.js.map": "/GalaxyRen/static/js/main.8f545346.js.map",
     "787.7815d080.chunk.js.map": "/GalaxyRen/static/js/787.7815d080.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.2f807dd5.css",
-    "static/js/main.bd6c645b.js"
+    "static/css/main.5d887bdd.css",
+    "static/js/main.8f545346.js"
   ]
 }
