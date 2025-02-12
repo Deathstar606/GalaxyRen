@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Example from './Navbar';
 import HeroSec from './HeroSec';
 import Service from './Services';

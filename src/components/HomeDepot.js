@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { CiLocationOff } from "react-icons/ci";
 import { CardImg, Container, Row, Col, Table, 
     Dropdown,
     DropdownToggle,
@@ -9,7 +10,6 @@ import { StaggeredText } from "./TextAnimate";
 import axios from "axios";
 import { baseUrl } from "../shared/baseurl";
 import Head from "../images/HomeD/hero-image.fill.size_1248x702.v1703441414.jpg"
-import Tool from "../images/HomeD/0535586_cordless-drill-machine-cd144v.jpeg"
 import icon1 from "../images/HomeD/location.png"
 import icon2 from "../images/HomeD/tools.png"
 import icon3 from "../images/HomeD/user.png"
@@ -20,235 +20,186 @@ import "swiper/css";
 import "swiper/css/navigation";
 
 function ToolDeats({ deats, handleHide }) {
-    const [duration, setDuration] = useState("not selected");
-    const [pickupMethod, setPickupMethod] = useState("not selected");
+    const [formData, setFormData] = useState({
+        toolId: deats._id,
+        duration: "",
+        pickupMethod: "",
+        price: 0,
+        charge: 0,
+        location: null,
+    });
+
+    const [currentPanel, setCurrentPanel] = useState("1st");
     const [dropdownOpen1, setDropdownOpen1] = useState(false);
     const [dropdownOpen2, setDropdownOpen2] = useState(false);
 
     const toggleDropdown1 = () => setDropdownOpen1(!dropdownOpen1);
     const toggleDropdown2 = () => setDropdownOpen2(!dropdownOpen2);
 
-    const postReservation = (toolId, duration, pickupMethod, location) => {
-        axios.post(baseUrl + "rents", {
-            toolId: toolId,
-            duration: duration,
-            method: pickupMethod,
-            location: {
-                latitude: location.latitude,
-                longitude: location.longitude
-            },
-        })
-        .then((response) => {
-            console.log("Reservation successful:", response.data);
-        })
-        .catch((error) => {
-            console.error("Error making reservation:", error);
-        });
+    const handleChange = (key, value) => {
+        setFormData(prev => ({ ...prev, [key]: value }));
     };
 
-    const handleReservation = () => {
-        const baseLocation = {
-            latitude: 45.4215,  // Example latitude for Ottawa
-            longitude: -75.6972 // Example longitude for Ottawa
-        };
-    
-        if (pickupMethod === "Home Delivery") {
+    const handleNext = () => {
+        if (currentPanel === "1st" && formData.pickupMethod && formData.duration) {
+            setCurrentPanel("2nd");
+        } 
+    };
 
-            const calculateDistance = (lat1, lon1, lat2, lon2) => {
-                const R = 6371; // Earth's radius in km
-                const toRad = (value) => (value * Math.PI) / 180;
-        
-                const dLat = toRad(lat2 - lat1);
-                const dLon = toRad(lon2 - lon1);
-        
-                const a =
-                    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                    Math.cos(toRad(lat1)) *
-                        Math.cos(toRad(lat2)) *
-                        Math.sin(dLon / 2) *
-                        Math.sin(dLon / 2);
-        
-                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-                return R * c; // Distance in km
-            };
+    const handleRrev = () => {
+        setCurrentPanel("1st");
+        handleChange("charge", 0);
+    }
 
-            const alertBox = document.createElement("div");
-            alertBox.innerText =
-                "For home delivery, we need to access your location to calculate the estimated delivery price.";
-            alertBox.style.cssText = `
-                position: fixed;
-                top: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: #f8d7da;
-                color: #721c24;
-                padding: 15px 25px;
-                border: 1px solid #f5c6cb;
-                border-radius: 5px;
-                z-index: 9999;
-            `;
-            document.body.appendChild(alertBox);
-    
-            setTimeout(() => {
-                document.body.removeChild(alertBox);
-            }, 3000); // Auto-remove after 3 seconds
-    
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const clientLocation = {
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude
-                        };
-    
-                        const distance = calculateDistance(
-                            baseLocation.latitude,
-                            baseLocation.longitude,
-                            clientLocation.latitude,
-                            clientLocation.longitude
-                        );
-    
-                        const charge = distance * 5; // $5 per km
-                        console.log(`Delivery Charge: $${charge.toFixed(2)}`);
-    
-                        postReservation(deats.id, duration, pickupMethod, clientLocation);
-                    },
-                    (error) => {
-                        console.error("Error fetching location:", error.message);
-                    }
-                );
-            } else {
-                console.error("Geolocation is not supported by this browser.");
-            }
-        } else if (pickupMethod === "Self Pickup") {
-            postReservation(deats.id, duration, pickupMethod, null);
+    const handleLocationCharge = (location) => {
+        const baseLocation = { latitude: 45.4215, longitude: -75.6972 };
+        const R = 6371;
+        const toRad = (value) => (value * Math.PI) / 180;
+
+        const dLat = toRad(location.latitude - baseLocation.latitude);
+        const dLon = toRad(location.longitude - baseLocation.longitude);
+
+        const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(baseLocation.latitude)) * Math.cos(toRad(location.latitude)) * Math.sin(dLon / 2) ** 2;
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+        const distance = R * c;
+        const charge = distance * 5;
+        handleChange("charge", charge.toFixed(2));
+    };
+
+    const findMyLocation = () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const clientLocation = {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude,
+                    };
+                    handleChange("location", clientLocation);
+                    handleLocationCharge(clientLocation);
+                },
+                (error) => console.error("Error fetching location:", error)
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
         }
     };
-    
+
+    const handleSubmit = () => {
+        if (formData.pickupMethod === "Self Pickup") {
+            handleChange("charge", 0);
+            handleChange("location", "");
+        }
+        
+        else if (formData.pickupMethod === "Home Delivery" && formData.charge === 0) {
+            alert("Please select a location for delivery.");
+        }
+        
+        console.log("Reservation Details:", formData);
+
+/*         axios.post(baseUrl + "rents", formData)
+            .then(response => console.log("Reservation successful:", response.data))
+            .catch(error => console.error("Error making reservation:", error)); */
+    };
 
     return (
-        <motion.div
-            className="modal-back"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
-            <motion.div
-                className="d-flex justify-content-center m-5"
-                initial={{ opacity: 0, y: -500 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -500 }}
-                transition={{ duration: 0.25, delay: 0.25 }}
-            >
-                <Container
-                    style={{
-                        minHeight: "50vh",
-                        backgroundColor: "white",
-                        borderRadius: "15px",
-                        padding: "40px",
-                    }}
-                >
-                    <button
-                        style={{
-                            position: "absolute",
-                            top: "0px",
-                            right: "10px",
-                            background: "transparent",
-                            border: "none",
-                            fontSize: "40px",
-                            color: "white",
-                            cursor: "pointer",
-                        }}
-                        onClick={handleHide}
-                    >
-                        &times;
-                    </button>
-                    <Row>
-                        <Col md={6} className="d-flex align-items-center justify-content-center">
-                            <CardImg src={deats.image} />
-                        </Col>
-                        <Col
-                            md={6}
-                            style={{
-                                border: "1px solid #ccc",
-                                borderRadius: "10px",
-                                padding: "15px",
-                            }}
-                        >
-                            <h3>{deats.name}</h3>
-                            <p>{deats.description}</p>
-                            <Table>
-                                <thead style={{ backgroundColor: "gray" }}>
-                                    <tr>
-                                        <th>4 Hour</th>
-                                        <th>1 Day</th>
-                                        <th>1 Week</th>
-                                        <th>4 Weeks</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        {deats.prices.map((price, index) => (
-                                            <td key={index}>{price} TK</td>
-                                        ))}
-                                    </tr>
-                                </tbody>
-                            </Table>
-                            <div className="d-flex mb-1">
-                                <Dropdown
-                                    className="mb-2"
-                                    isOpen={dropdownOpen1}
-                                    toggle={toggleDropdown1}
-                                >
-                                    <DropdownToggle caret className="butt">
-                                        Duration
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem onClick={() => setDuration("1 Hour")}>
-                                            1 Hour
-                                        </DropdownItem>
-                                        <DropdownItem onClick={() => setDuration("1 Day")}>
-                                            1 Day
-                                        </DropdownItem>
-                                        <DropdownItem onClick={() => setDuration("1 Week")}>
-                                            1 Week
-                                        </DropdownItem>
-                                        <DropdownItem onClick={() => setDuration("4 Weeks")}>
-                                            4 Weeks
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </Dropdown>
-                                <Dropdown
-                                    className="mb-2"
-                                    isOpen={dropdownOpen2}
-                                    toggle={toggleDropdown2}
-                                >
-                                    <DropdownToggle caret className="butt">
-                                        Pickup Method
-                                    </DropdownToggle>
-                                    <DropdownMenu>
-                                        <DropdownItem onClick={() => setPickupMethod("Self Pickup")}>
-                                            Self Pickup
-                                        </DropdownItem>
-                                        <DropdownItem onClick={() => setPickupMethod("Home Delivery")}>
-                                            Home Delivery
-                                        </DropdownItem>
-                                    </DropdownMenu>
-                                </Dropdown>
-                            </div>
-                            <div className="ml-2 mt-2">
-                                <p className="text-muted">Duration: {duration}</p>
-                                <p className="text-muted">Pick up method: {pickupMethod}</p>
-                            </div>
-                            <div
-                                className="butt"
-                                style={{ display: "inline-block", cursor: "pointer" }}
-                                onClick={handleReservation}
-                            >
-                                Request Reservation
-                            </div>
-                        </Col>
-                    </Row>
+        <motion.div className="modal-back" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+            <motion.div className="d-flex justify-content-center m-5" initial={{ opacity: 0, y: -500 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -500 }} transition={{ duration: 0.25, delay: 0.25 }}>
+                <Container style={{ minHeight: "50vh", backgroundColor: "white", borderRadius: "15px", padding: "40px" }}>
+                    <button style={{ position: "absolute", top: "0px", right: "10px", background: "transparent", border: "none", fontSize: "40px", color: "white", cursor: "pointer" }} onClick={handleHide}>&times;</button>
+
+                    {currentPanel === "1st" && (
+                        <>
+                            <Row>
+                                <Col md={6} className="d-flex align-items-center justify-content-center">
+                                    <CardImg src={deats.image} />
+                                </Col>
+                                <Col md={6} style={{ border: "1px solid #ccc", borderRadius: "10px", padding: "15px" }}>
+                                    <h3>{deats.name}</h3>
+                                    <p>{deats.description}</p>
+                                    <Table>
+                                        <thead style={{ backgroundColor: "gray" }}>
+                                            <tr>
+                                                <th>4 Hour</th>
+                                                <th>1 Day</th>
+                                                <th>1 Week</th>
+                                                <th>4 Weeks</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                {deats.prices.map((price, index) => (
+                                                    <td key={index}>{price} TK</td>
+                                                ))}
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+                                    <div className="d-flex mb-1">
+                                        <Dropdown isOpen={dropdownOpen1} toggle={toggleDropdown1}>
+                                            <DropdownToggle caret className="butt">
+                                                Duration
+                                            </DropdownToggle>
+                                            <DropdownMenu>
+                                                {["4 Hour", "1 Day", "1 Week", "4 Weeks"].map((duration, index) => (
+                                                    <DropdownItem key={duration} onClick={() => {
+                                                        handleChange("duration", duration);
+                                                        handleChange("price", deats.prices[index]);
+                                                    }}>{duration}</DropdownItem>
+                                                ))}
+                                            </DropdownMenu>
+                                        </Dropdown>
+
+                                        <Dropdown isOpen={dropdownOpen2} toggle={toggleDropdown2}>
+                                            <DropdownToggle caret className="butt">
+                                                Pickup Method
+                                            </DropdownToggle>
+                                            <DropdownMenu>
+                                                <DropdownItem onClick={() => handleChange("pickupMethod", "Self Pickup")}>Self Pickup</DropdownItem>
+                                                <DropdownItem onClick={() => handleChange("pickupMethod", "Home Delivery")}>Home Delivery</DropdownItem>
+                                            </DropdownMenu>
+                                        </Dropdown>
+                                    </div>
+                                    <div className="ml-2 mt-4 mb-2">
+                                        <p className="text-muted">Duration: {formData.duration}</p>
+                                        <p className="text-muted">Pick up method: {formData.pickupMethod}</p>
+                                    </div>
+                                    <div style={{display: "inline-block"}} className="butt" onClick={handleNext}>Request Reservation</div>
+                                </Col>
+                            </Row>
+                        </>
+                    )}
+
+                    {currentPanel === "2nd" && (
+                        <Row>
+                            <Col md={6} className="d-flex align-items-center justify-content-center">
+                                <CardImg src={deats.image} />
+                            </Col>
+                            <Col md={6}>
+                                <h4 className="mb-4">Reservation Summary</h4>
+                                <p>Pickup Method: {formData.pickupMethod}</p>
+                                <p>Duration: {formData.duration}</p>
+                                <p>Price: {formData.price} TK</p>
+
+                                {formData.pickupMethod === "Self Pickup" ? (
+                                    <>
+                                        <p>Delivery Charge: $0</p>
+                                        <div className="butt" style={{display: "inline-block"}} onClick={handleSubmit}>Confirm Reservation</div>
+                                        <div className="butt" style={{display: "inline-block"}} onClick={handleRrev}>Go Back</div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="butt" style={{display: "inline-block"}} onClick={() => {handleChange("charge", 10); handleChange("location", "Ottawa");}}>Ottawa (+$10)</div>
+                                        <div className="butt" style={{display: "inline-block"}} onClick={() => {handleChange("charge", 15); handleChange("location", "Toronto");}}>Toronto (+$15)</div>
+                                        <div className="butt" style={{display: "inline-block"}} onClick={() => {handleChange("charge", 20); handleChange("location", "Quebec");}}>Quebec (+$20)</div>
+                                        <div style={{cursor: "pointer"}} className="mt-2 mb-2" onClick={findMyLocation}>Find My Location <CiLocationOff /></div>
+                                        <p>Delivery Charge: ${formData.charge}</p>
+                                        <div className="butt" style={{display: "inline-block"}} onClick={handleSubmit}>Confirm Reservation</div>
+                                        <div className="butt" style={{display: "inline-block"}} onClick={handleRrev}>Go Back</div>
+                                    </>
+                                )}                            
+                            </Col>
+                        </Row>
+                    )}
                 </Container>
             </motion.div>
         </motion.div>
