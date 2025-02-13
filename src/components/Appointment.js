@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Row, Form, FormGroup, Label, Input, Container, Col, CardImg } from 'reactstrap';
+import { Row, Form, FormGroup, Label, Input, Container, Col, CardImg, Button } from 'reactstrap';
+import { baseUrl } from '../shared/baseurl';
+import axios from 'axios';
 import contact from "../images/hero-image.fill.size_1248x702.v1703441414.jpg"
 
 const AppointmentForm = () => {
     const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        address: '',
-        jobType: '',
-        jobDescription: '',
+        name: "",
+        email: "",
+        phone: "",
+        address: "",
+        description: "",
     });
-
-    const [currentPanel, setCurrentPanel] = useState('details');
+    
+    const [image, setImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
 
     const handleChange = (e) => {
         setFormData({
@@ -21,21 +24,32 @@ const AppointmentForm = () => {
         });
     };
 
-    const handleNext = () => {
-        if (currentPanel === 'details') {
-            setCurrentPanel('job');
-        }
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+        setImagePreview(URL.createObjectURL(file));
     };
 
-    const handlePrevious = () => {
-        if (currentPanel === 'job') {
-            setCurrentPanel('details');
-        }
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
+        const data = new FormData();
+        for (const key in formData) {
+          data.append(key, formData[key]);
+        }
+        if (image) {
+          data.append('image', image);
+        }
+
+        try {
+            const response = await axios.post(baseUrl + "contact", data, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+            console.log("Success:", response.data);
+        } catch (error) {
+            console.error("Error:", error);
+        }
     };
 
     return (
@@ -44,11 +58,9 @@ const AppointmentForm = () => {
         initial = {{x: 1000, opacity: 0}}
         animate= {{x: 0, opacity: 1}}
         exit= {{x: -1000, opacity: 0}}>
-        <Container className="d-flex justify-content-center" style={{ height: "70vh",paddingTop: "20vh", marginBottom: "10rem" }}>
-            <Col sm="12" md="6">
-                <Form onSubmit={handleSubmit} style={{ overflow: "hidden" }}>
+        <Container className="d-flex justify-content-center" style={{ paddingTop: "5vh", marginBottom: "10rem"}}>
+                <Form onSubmit={handleSubmit} style={{ overflow: "hidden", width: "100%" }}>
                     <AnimatePresence mode='wait'>
-                        {currentPanel === 'details' && (
                             <motion.div
                                 key="details"
                                 transition={{ duration: 0.5, type: "tween", ease: "easeIn" }}
@@ -57,108 +69,64 @@ const AppointmentForm = () => {
                                 exit={{ x: -1000, opacity: 0 }}
                             >
                                 <h3 className='text-center pb-4'>Contact Information</h3>
-                                <FormGroup>
-                                    <Label for="name">Name</Label>
-                                    <Input
-                                        type="text"
-                                        id="name"
-                                        name="name"
-                                        value={formData.name}
-                                        style={{ borderRadius: "10px" }}
-                                        onChange={handleChange}
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="email">Email</Label>
-                                    <Input
-                                        type="email"
-                                        id="email"
-                                        name="email"
-                                        value={formData.email}
-                                        style={{ borderRadius: "10px" }}
-                                        onChange={handleChange}
-                                    />
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="address">Address</Label>
-                                    <Input
-                                        type="text"
-                                        id="address"
-                                        name="address"
-                                        value={formData.address}
-                                        style={{ borderRadius: "10px" }}
-                                        onChange={handleChange}
-                                    />
-                                </FormGroup>
-                                <div className='d-flex justify-content-center pt-2'>
-                                    <button
-                                        className='butt'
-                                        type="button"
-                                        onClick={handleNext}
-                                        disabled={!formData.name || !formData.email || !formData.address}
-                                    >
-                                        Next
-                                    </button>
-                                </div>
+                                <Row className='pt-4'>
+                                    <Col md={6}>
+                                        <FormGroup>
+                                            <Label for="name">Name</Label>
+                                            <Input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FormGroup>
+                                            <Label for="phone">Phone</Label>
+                                            <Input type="text" name="phone" id="phone" value={formData.phone} onChange={handleChange} required />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={6}>
+                                        <FormGroup>
+                                            <Label for="email">Email</Label>
+                                            <Input type="email" name="email" id="email" value={formData.email} onChange={handleChange} required />
+                                        </FormGroup>
+                                    </Col>
+                                    <Col md={6}>
+                                        <FormGroup>
+                                            <Label for="address">Address</Label>
+                                            <Input type="text" name="address" id="address" value={formData.address} onChange={handleChange} required />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
+                                        <FormGroup>
+                                            <Label for="description">Description</Label>
+                                            <Input style={{height: "100px"}} type="textarea" name="description" id="description" value={formData.description} onChange={handleChange} required />
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col md={12}>
+                                        <FormGroup>
+                                            <Label for="image">Upload Image</Label>
+                                            <div className="custom-file">
+                                                <Input type="file" className="custom-file-input" name="image" id="image" onChange={handleImageChange} accept="image/*" />
+                                                <Label className="custom-file-label" for="image">Choose file</Label>
+                                            </div>
+                                        </FormGroup>
+                                    </Col>
+                                </Row>
+                                {imagePreview && (
+                                    <Row className="mb-3">
+                                        <Col md={12} className="text-center">
+                                            <img src={imagePreview} alt="Preview" style={{ maxWidth: "100%", height: "auto", borderRadius: "8px", marginTop: "10px" }} />
+                                        </Col>
+                                    </Row>
+                                )}
+                                <Button style={{display: "inline-block"}} type="submit" className='butt'>Submit</Button>
                             </motion.div>
-                        )}
-                        {currentPanel === 'job' && (
-                            <motion.div
-                                key="job"
-                                transition={{ duration: 0.5, type: "tween", ease: "easeIn" }}
-                                initial={{ x: 1000, opacity: 0 }}
-                                animate={{ x: 0, opacity: 1 }}
-                                exit={{ x: -1000, opacity: 0 }}
-                            >
-                                <h3 className='text-center pb-4'>Job Information</h3>
-                                <FormGroup>
-                                    <Label for="jobType">Job Type</Label>
-                                    <Input
-                                        type="select"
-                                        id="jobType"
-                                        name="jobType"
-                                        value={formData.jobType}
-                                        style={{ borderRadius: "10px", margin: "10px" }}
-                                        onChange={handleChange}
-                                    >
-                                        <option value="">Select Job Type</option>
-                                        <option value="Full-Time">Full-Time</option>
-                                        <option value="Part-Time">Part-Time</option>
-                                        <option value="Freelance">Freelance</option>
-                                    </Input>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label for="jobDescription">Job Description</Label>
-                                    <Input
-                                        type="textarea"
-                                        id="jobDescription"
-                                        name="jobDescription"
-                                        value={formData.jobDescription}
-                                        style={{ borderRadius: "10px", height: "300px", resize: "none" }} // Ensures consistent width
-                                        onChange={handleChange}
-                                    />
-                                </FormGroup>
-                                <div className='d-flex justify-content-center pt-2'>
-                                    <button
-                                        className='butt'
-                                        type="button"
-                                        onClick={handlePrevious}
-                                    >
-                                        Back
-                                    </button>
-                                    <button
-                                        className='butt'
-                                        type="submit"
-                                        disabled={!formData.jobType || !formData.jobDescription}
-                                    >
-                                        Submit
-                                    </button>
-                                </div>
-                            </motion.div>
-                        )}
                     </AnimatePresence>
                 </Form>
-            </Col>
         </Container>
                 <Row className="w-100" style={{backgroundColor: "#00084c", padding: "4rem"}}>
                     <Col md={6} className="d-flex justify-content-center">
