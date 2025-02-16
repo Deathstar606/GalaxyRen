@@ -117,7 +117,8 @@ function ToolDeats({ deats, handleHide }) {
                 return axios.post(baseUrl + "mail", {
                     subject: "this is a test",
                     htmlContent: emailHtml,
-                    email: updatedFormData.email
+                    email: updatedFormData.email,
+                    message: `A reservation for ${deats.name} has been confirmed. The requested duration is ${updatedFormData.duration}.`
                 });
             })
             .then(emailResponse => {
@@ -140,7 +141,7 @@ function ToolDeats({ deats, handleHide }) {
                         <>
                             <Row>
                                 <Col md={6} className="d-flex align-items-center justify-content-center">
-                                    <CardImg src={deats.image} />
+                                    <CardImg src={baseUrl + deats.image} />
                                 </Col>
                                 <Col md={6} style={{ border: "1px solid #ccc", borderRadius: "10px", padding: "15px" }}>
                                     <h3>{deats.name}</h3>
@@ -200,7 +201,7 @@ function ToolDeats({ deats, handleHide }) {
                     {currentPanel === "2nd" && (
                         <Row>
                             <Col md={6} className="d-flex align-items-center justify-content-center">
-                                <CardImg src={deats.image} />
+                                <CardImg src={baseUrl + deats.image} />
                             </Col>
                             <Col md={6}>
                                 <h4 className="mb-4">Reservation Summary</h4>
@@ -293,7 +294,7 @@ function HomeD ({tools}) {
                         boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)"
                     }}
                 >
-                    <CardImg src={`public/${tl.image}`}></CardImg>
+                    <CardImg src={baseUrl + tl.image}></CardImg>
                     <p className="mt-3">{tl.name}</p>
                     <div
                         className="butt"

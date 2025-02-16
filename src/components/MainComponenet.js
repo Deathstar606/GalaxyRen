@@ -9,18 +9,24 @@ import AppointmentForm from './Appointment';
 import Estimation from './Estimation';
 import CatDeat from './CatDeats';
 import SubCat from './CategoryWSub';
+import Admin from './Admin';
 import Footer from './Footer';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { connect } from 'react-redux';
-import { fetcTools } from '../redux/ActionCreator';
+import { fetcTools, fetchContacts, loginUser, logoutUser } from '../redux/ActionCreator';
 
 const mapStateToProps = (state) => ({
   tools: state.tools,
+  contacts: state.contacts,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetcTools: () => dispatch(fetcTools()),
+  fetchContacts: () => dispatch(fetchContacts()),
+  loginUser: (creds) => dispatch(loginUser(creds)),
+  logoutUser: () => dispatch(logoutUser())
 });
 
 const Home = () => (
@@ -50,6 +56,7 @@ const Main = (props) => {
 
   useEffect(() => {
     props.fetcTools();
+    props.fetchContacts();
   }, []);
 
   return (
@@ -63,6 +70,7 @@ const Main = (props) => {
           <Route path="/home/subcat" element={<CategoriesWsub />} />
           <Route path="/home/aboutus" element={<About />} />
           <Route path="/home/contactus" element={<AppointmentForm />} />
+          <Route path="/home/admin" element={<Admin auth={props.auth} tools={props.tools} contacts={props.contacts} loginUser={props.loginUser} logoutUser={props.logoutUser} />} />
           <Route path="*" element={<Navigate to="/home" />} />
         </Routes>
       </AnimatePresence>
