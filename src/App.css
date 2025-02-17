@@ -230,3 +230,19 @@ body {
 .swiper-button-prev {
   display: none; /* Hides the previous button */
 }
+
+.service-image-container {
+  position: relative;
+  width: 100%; /* Or any fixed width you prefer */
+  padding-top: 70%; /* This creates the 4:3 aspect ratio */
+  overflow: hidden;
+}
+
+.service-image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: center; /* Ensures the image covers the container */
+}

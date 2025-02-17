@@ -1,6 +1,43 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseurl';
 
+export const fetcServices = () => (dispatch) => {
+    dispatch(servicesLoading(true));
+
+    return fetch(baseUrl + 'services')
+        .then(response => {
+            if (response.ok) {
+                return response;
+            }
+            else {
+                var error = new Error('Error ' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            var errmess = new Error(error.message);
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(tools => dispatch(addServices(tools)))
+        .catch(error => dispatch(servicesFailed(error.message)));
+}
+
+export const servicesLoading = () => ({
+    type: ActionTypes.SERVICE_LOADING
+});
+
+export const servicesFailed = (errmess) => ({
+    type: ActionTypes.SERVICE_FAILED,
+    payload: errmess
+});
+
+export const addServices = (tools) => ({
+    type: ActionTypes.ADD_SERVICE,
+    payload: tools
+});
+
 export const fetcTools = () => (dispatch) => {
     dispatch(toolsLoading(true));
 
@@ -36,6 +73,44 @@ export const toolsFailed = (errmess) => ({
 export const addTools = (tools) => ({
     type: ActionTypes.ADD_TOOL,
     payload: tools
+});
+
+export const fetchReservations = () => (dispatch) => {
+    dispatch(reservationLoading(true));
+
+    const token = localStorage.getItem("token"); // Retrieve token from localStorage
+
+    return fetch(baseUrl + "rents", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `bearer ${token}` // Attach token here
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("HEy NIGGA");
+            return response.json();
+        } else {
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
+        }
+    })
+    .then(tools => dispatch(addReservations(tools)))
+    .catch(error => dispatch(reservationFailed(error.message)));
+};
+
+export const reservationLoading = () => ({
+    type: ActionTypes.RESERVATION_LOADING
+});
+
+export const reservationFailed = (errmess) => ({
+    type: ActionTypes.RESERVATION_FAILED,
+    payload: errmess
+});
+
+export const addReservations = (contacts) => ({
+    type: ActionTypes.ADD_RESERVATION,
+    payload: contacts
 });
 
 export const fetchContacts = () => (dispatch) => {
@@ -127,6 +202,7 @@ export const loginUser = (creds) => (dispatch) => {
             localStorage.setItem('creds', JSON.stringify(creds));
 
             dispatch(fetchContacts());
+            dispatch(fetchReservations());
             dispatch(receiveLogin(response));
         }
         else {

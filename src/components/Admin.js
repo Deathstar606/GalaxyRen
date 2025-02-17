@@ -1,20 +1,74 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Form, FormGroup, Label, Input, Container, CardImg } from "reactstrap";
-import axios from "axios";
+import { Row, Col, Button, Form, FormGroup, Label, Input, Container, CardImg, Card, CardBody, CardTitle, CardText } from "reactstrap";
+import ServiceForm from "../Admin Forms/ServiceForm";
 import { baseUrl } from "../shared/baseurl";
+import ToolsForm from "../Admin Forms/ToolsForm";
 
 const Admin = (props) => {
-
+  
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [activeTab, setActiveTab] = useState("messages");
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    prices: ["", "", "", ""]
-  });
 
-  const [image, setImage] = useState(null);
+  const services = props.services.services.map((serve, index) => {
+    return (
+      <Col md={6}>
+        <Card key={index} className="mb-3 p-3">
+          <CardBody>
+            <div className="service-image-container">
+              <CardImg src={baseUrl + serve.mainImg}/>
+            </div>
+            <CardText>Service Name: {serve.name}</CardText>
+            <CardText>Description: {serve.description}</CardText>
+          </CardBody>
+        </Card>
+      </Col>
+
+    )
+  })
+
+  const reservations = props.reservations.reservations.map((res, index) => {
+    return (
+      <>
+        <Card key={index} className="mb-3 p-3">
+          <CardBody>
+            <CardTitle tag="h5">Reservation Date: {new Date(res.createdAt).toLocaleDateString("en-GB")}</CardTitle>
+            {props.tools.tool.find((tool) => tool._id === res.toolId) && (
+              <>
+                <div className="d-flex justify-content-center">
+                  <CardImg src={baseUrl + props.tools.tool.find((tool) => tool._id === res.toolId).image} alt={props.tools.tool.find((tool) => tool._id === res.toolId).name} style={{ width: "100px" }} />
+                </div>
+                <h6 className="text-center">{props.tools.tool.find((tool) => tool._id === res.toolId).name}</h6>
+              </>
+            )}
+            <CardText>Duration: {res.duration}</CardText>
+            <CardText>Pickup Method: {res.pickupMethod}</CardText>
+            <hr />
+            <CardText>Name: {res.name}</CardText>
+            <CardText>Email: {res.email}</CardText>
+            <CardText>Phone: {res.phone}</CardText>
+            <CardText>Charge: ${res.charge}</CardText>
+            {res.location &&
+              (typeof res.location === "string" ? (
+                <CardText>Location: {res.location}</CardText>
+              ) : res.location.latitude && res.location.longitude ? (
+                <div style={{ height: "200px", width: "100%" }}>
+                  <iframe
+                    width="100%"
+                    height="200"
+                    frameBorder="0"
+                    scrolling="no"
+                    marginHeight="0"
+                    marginWidth="0"
+                    src={`https://maps.google.com/maps?q=${res.location.latitude},${res.location.longitude}&z=13&output=embed`}
+                  ></iframe>
+                </div>
+              ) : null)}
+          </CardBody>
+        </Card>
+      </>
+    );
+  });
 
   const contacts = props.contacts.contact.map((contact, index) => {
       return (
@@ -34,7 +88,6 @@ const Admin = (props) => {
   })
   
   const tools = props.tools.tool.map((tool, index) => {
-    console.log(tool);
     return (
       <>
         <Col md={6} key={index}>
@@ -51,55 +104,6 @@ const Admin = (props) => {
       </>
     )
   })
-
-  const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-  };
-
-  const handlePriceChange = (index, value) => {
-      const updatedPrices = [...formData.prices];
-      updatedPrices[index] = value;
-      setFormData({ ...formData, prices: updatedPrices });
-  };
-
-  const handleImageChange = (e) => {
-      const file = e.target.files[0];
-      setImage(file);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = new FormData();
-    
-    for (const key in formData) {
-        if (Array.isArray(formData[key])) {
-            formData[key].forEach((item, index) => {
-                data.append(`${key}[${index}]`, item);
-            });
-        } else {
-            data.append(key, formData[key]);
-        }
-    }
-    
-    if (image) {
-        data.append("image", image);
-    }
-
-    const token = localStorage.getItem("token");
-
-    try {
-        const response = await axios.post(baseUrl + "tools", data, {
-            headers: {
-                "Content-Type": "multipart/form-data",
-                "Authorization": `bearer ${token}`, // Attach token here
-            },
-        });
-        console.log("Success:", response.data);
-    } catch (error) {
-        console.error("Error:", error.response ? error.response.data : error);
-    }
-};
 
   const handleChangeAdmin = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -120,8 +124,8 @@ const Admin = (props) => {
                 <Col md={3} xs={6}>
                     <div 
                         style={{ 
-                            backgroundColor: activeTab === "messages" ? "white" : "black", 
-                            color: activeTab === "messages" ? "black" : "white" 
+                            backgroundColor: activeTab === "messages" ? "black" : "white", 
+                            color: activeTab === "messages" ? "white" : "black" 
                         }} 
                         className="border rounded p-3 text-center" 
                         onClick={() => setActiveTab("messages")}
@@ -132,8 +136,20 @@ const Admin = (props) => {
                 <Col md={3} xs={6}>
                     <div 
                         style={{ 
-                            backgroundColor: activeTab === "tools" ? "white" : "black", 
-                            color: activeTab === "tools" ? "black" : "white" 
+                            backgroundColor: activeTab === "services" ? "black" : "white", 
+                            color: activeTab === "services" ? "white" : "black" 
+                        }} 
+                        className="border rounded p-3 text-center" 
+                        onClick={() => setActiveTab("services")}
+                    >
+                        Services
+                    </div>
+                </Col>
+                <Col md={3} xs={6}>
+                    <div 
+                        style={{ 
+                            backgroundColor: activeTab === "tools" ? "black" : "white", 
+                            color: activeTab === "tools" ? "white" : "black" 
                         }} 
                         className="border rounded p-3 text-center" 
                         onClick={() => setActiveTab("tools")}
@@ -141,39 +157,39 @@ const Admin = (props) => {
                         Tools
                     </div>
                 </Col>
+                <Col md={3} xs={6}>
+                    <div 
+                        style={{ 
+                            backgroundColor: activeTab === "reservations" ? "black" : "white", 
+                            color: activeTab === "reservations" ? "white" : "black" 
+                        }} 
+                        className="border rounded p-3 text-center" 
+                        onClick={() => setActiveTab("reservations")}
+                    >
+                        Reservations
+                    </div>
+                </Col>
               </Row>
               {activeTab === "messages" && (
                 <Row> {contacts} </Row>
               )}
+              {activeTab === "services" && (
+                <>
+                  <Row> {services} </Row>
+                  <ServiceForm />
+                </>
+              )}
               {activeTab === "tools" && (
+                <>
                   <Row> {tools} </Row>
-              )}          
+                  <ToolsForm/>
+                </>
+              )}
+              {activeTab === "reservations" && (
+                  <Row> {reservations} </Row>
+              )}    
             </Container>
-{/*             <Form onSubmit={handleSubmit}>
-                <FormGroup>
-                    <Label for="name">Tool Name:</Label>
-                    <Input type="text" name="name" id="name" value={formData.name} onChange={handleChange} required />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="description">Description:</Label>
-                    <Input type="textarea" name="description" id="description" value={formData.description} onChange={handleChange} required />
-                </FormGroup>
-                <FormGroup>
-                    <Label>Prices:</Label>
-                    <Row>
-                        <Col><Input type="number" placeholder="1 hour" value={formData.prices[0]} onChange={(e) => handlePriceChange(0, e.target.value)} required /></Col>
-                        <Col><Input type="number" placeholder="4 hours" value={formData.prices[1]} onChange={(e) => handlePriceChange(1, e.target.value)} required /></Col>
-                        <Col><Input type="number" placeholder="1 day" value={formData.prices[2]} onChange={(e) => handlePriceChange(2, e.target.value)} required /></Col>
-                        <Col><Input type="number" placeholder="1 week" value={formData.prices[3]} onChange={(e) => handlePriceChange(3, e.target.value)} required /></Col>
-                    </Row>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="image">Upload Image:</Label>
-                    <Input type="file" id="image" onChange={handleImageChange} accept="image/*" required />
-                </FormGroup>
-                <Button type="submit" color="primary">Submit</Button>
-            </Form>
- */}            <div style={{display: "inline-block"}} className="butt" onClick={props.logoutUser}>Logout</div>
+            <div style={{display: "inline-block"}} className="butt" onClick={props.logoutUser}>Logout</div>
         </div>
       ) : (
         <Form onSubmit={handleSubmitAdmin} className="p-4 border rounded shadow">
