@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Example from './Navbar';
 import HeroSec from './HeroSec';
 import Service from './Services';
+import Moto from './Moto';
 import Testi from './Testimonial';
 import HomeD from './HomeDepot';
 import About from './AboutUs';
@@ -43,6 +44,7 @@ const Home = ({services}) => (
     <HeroSec />
     <Service services={services}/>
     <Estimation/>
+    <Moto />
     <Testi/>
   </motion.div>
 );
