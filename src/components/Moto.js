@@ -10,6 +10,7 @@ function Moto () {
             <Row>
                 <Col md={4}>
                     <motion.div
+                        className="m-2"
                         initial = {{y: 50, opacity: 0}}
                         transition={{duration: 1, type: "tween", ease: "easeIn"}}
                         whileInView={{y: 0, opacity: 1}}>
@@ -31,6 +32,7 @@ function Moto () {
                 </Col>
                 <Col md={4}>
                     <motion.div
+                        className="m-2"
                         initial = {{y: 50, opacity: 0}}
                         transition={{duration: 1, type: "tween", ease: "easeIn"}}
                         whileInView={{y: 0, opacity: 1}}>
@@ -52,6 +54,7 @@ function Moto () {
                 </Col>
                 <Col md={4}>
                     <motion.div
+                        className="m-2"
                         initial = {{y: 50, opacity: 0}}
                         transition={{duration: 1, type: "tween", ease: "easeIn"}}
                         whileInView={{y: 0, opacity: 1}}>

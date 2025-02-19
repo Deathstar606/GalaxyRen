@@ -27,7 +27,6 @@ const Navbar = () => {
       setTimeout(() => {
         const element = document.getElementById(scrollTarget);
         if (element) {
-          console.log("yes")
           const offset = 100; // Set your desired offset here
           const elementPosition = element.getBoundingClientRect().top + window.scrollY; // Get element position
           const offsetPosition = elementPosition - offset; // Adjust for offset
@@ -60,7 +59,7 @@ const Navbar = () => {
         <BootstrapNavbar light expand="md">
           <NavbarBrand href="/"><img className='logo' src={logo}/></NavbarBrand>
           <MediaQuery maxWidth={639}>
-            <Burger />
+            <Burger scrollFunc={handleClick}/>
           </MediaQuery>
           <MediaQuery minWidth={640}>
             <Nav className="ml-auto">

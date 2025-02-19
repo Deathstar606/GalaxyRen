@@ -1,52 +1,42 @@
 import React from 'react';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa';
 
 function Footer() {
   return (
-    <div /* className='mt-5' */ style={{backgroundColor: "#d8d9da"}}>
-        <Container style={{maxWidth: "85%"}}>
-            <Row>
-                <Col md={5}>
-                    <h1 style={{paddingBottom: "5%", paddingTop: "10%"}}>Fashion for those who appreciate quality</h1>
-                </Col>
-            </Row>
-            <Row>
-                <div className='d-flex' style={{paddingBottom: "10%"}}>
-                    <Col md={12} xs={10} style={{ paddingRight: '5px'}} className='d-flex'> {/* Added inline style to reduce right padding */}
-                        <Form style={{width: "100%"}}>
-                            <Form.Group>
-                                <Form.Control
-                                    style={{ borderRadius: "15px", borderWidth: "2px", height: "40px", borderColor: "#909090" }}
-                                    placeholder='Your Mail Address'
-                                    type="email"
-                                    name="email"
-                                    required
-                                />
-                            </Form.Group>
-                        </Form>
-                    </Col>
-                    <Button variant="light" type="submit" style={{ borderRadius: "15px" }}>
-                        Send
-                    </Button>
-                </div>
-                <Col md={4}></Col>
-                <Col md={2} xs={6}>
-                    <ul style={{ listStyleType: 'none' }}>
-                        <li className='mb-4'>Home</li>
-                        <li className='mb-4'>Category</li>
-                        <li className='mb-4'>Know Us</li>
-                    </ul>
-                </Col>
-                <Col md={2} xs={6}>
-                    <ul style={{ listStyleType: 'none' }}>
-                        <li className='mb-4'>Shirts</li>
-                        <li className='mb-4'>Pants</li>
-                        <li className='mb-4'>Hoodies</li>
-                    </ul>
-                </Col>
-            </Row>
-        </Container>
+    <div className='pt-4 pb-4' style={{ backgroundColor: "#d8d9da", padding: "3% 0" }}>
+      <Container style={{ maxWidth: "85%" }}>
+        <Row>
+          <Col md={5}>
+            <h1 style={{ paddingBottom: "5%" }}>We're only one call away</h1>
+          </Col>
+        </Row>
+        <Row>
+          <Col md={3} xs={6}>
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
+              <li className='mb-3'>Contact Us</li>
+              <li className='mb-3'>Free Estimation</li>
+              <li className='mb-3'>Rent Tool</li>
+            </ul>
+          </Col>
+          <Col md={3} xs={6}>
+            <ul style={{ listStyleType: 'none', padding: 0 }}>
+              <li className='mb-3'>About Us</li>
+              <li className='mb-3'>Services</li>
+            </ul>
+          </Col>
+          <Col md={3} xs={12} className='mt-3 mt-md-0'>
+            <p><strong>Phone:</strong> 01954379684</p>
+            <p><strong>Email:</strong> dsfardin606@gmail.com</p>
+            <p><strong>Location:</strong> 123 Main Street, City Name</p>
+          </Col>
+          <Col md={3} xs={12} className='mt-3 mt-md-0 d-flex align-items-center justify-content-center'>
+            <FaFacebook size={24} className='mx-2' />
+            <FaInstagram size={24} className='mx-2' />
+            <FaTwitter size={24} className='mx-2' />
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
