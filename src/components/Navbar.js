@@ -10,18 +10,24 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import logo from "../images/GALAXY_WEBSITE_Transparent.svg";
 import Burger from './Burger';
 import MediaQuery from 'react-responsive';
+import { Link as LinkScroll } from 'react-scroll';
 
 const Navbar = () => {
-
   const navigate = useNavigate(); // Replaces useHistory
   const location = useLocation();
   const [scrollTarget, setScrollTarget] = useState(null);
+
+  const pathSegments = location.pathname.split("/"); // Split by "/"
+  const endpoint = pathSegments[pathSegments.length - 1]; // Get last segment
+  
+  const [currentEp, setCurrentEp] = useState(null);
 
   useEffect(() => {
     if (location.pathname === "/home" && scrollTarget) {
       setTimeout(() => {
         const element = document.getElementById(scrollTarget);
         if (element) {
+          console.log("yes")
           const offset = 100; // Set your desired offset here
           const elementPosition = element.getBoundingClientRect().top + window.scrollY; // Get element position
           const offsetPosition = elementPosition - offset; // Adjust for offset
@@ -31,9 +37,22 @@ const Navbar = () => {
             behavior: 'smooth',
           });
         }
-      }, 500); // Delay for navigation to complete
+      }, 600); // Delay for navigation to complete
     }
   }, [location, scrollTarget]); // Dependency on location and scrollTarget
+
+  useEffect(() => {
+    setCurrentEp(endpoint)
+  }, [endpoint]);
+
+  function handleClick (targetId) {
+    if (location.pathname !== "/home") {
+      setScrollTarget(targetId); // Set the target for scrolling
+      navigate("/home"); // Redirect to /home
+    } else {
+      setScrollTarget(targetId); // Set target for the current page
+    }
+  };
 
   return (
     <Container>
@@ -45,7 +64,7 @@ const Navbar = () => {
           </MediaQuery>
           <MediaQuery minWidth={640}>
             <Nav className="ml-auto">
-              <NavItem className='nav-ele'>
+              <NavItem className={`nav-ele ${currentEp === "contactus" ? "active_nav" : ""}`}>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500", textDecoration: "none" }}
                   to="/home/contactus"
@@ -54,14 +73,19 @@ const Navbar = () => {
                 </Link>
               </NavItem>
               <NavItem className='nav-ele'>
-                <Link
-                  style={{ color: "black", fontSize: "18px", fontWeight: "500", textDecoration: "none" }}
-                  to="/home/contactus"
+                <LinkScroll
+                  style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
+                  to="freest"
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
+                  onClick={() => handleClick('freest')}
                 >
-                  Free Estimation
-                </Link>
+                    Free Estimation
+                </LinkScroll>
               </NavItem>
-              <NavItem className='nav-ele'>
+              <NavItem className={`nav-ele ${currentEp === "homed" ? "active_nav" : ""}`}>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500", textDecoration: "none" }}
                   to="/home/homed"
@@ -69,7 +93,7 @@ const Navbar = () => {
                   Rent Tool
                 </Link>
               </NavItem>
-              <NavItem className='nav-ele'>
+              <NavItem className={`nav-ele ${currentEp === "aboutus" ? "active_nav" : ""}`}>
                 <Link
                   style={{ color: "black", fontSize: "18px", fontWeight: "500", textDecoration: "none" }}
                   to="/home/aboutus"
@@ -78,12 +102,17 @@ const Navbar = () => {
                 </Link>
               </NavItem>
               <NavItem className='nav-ele'>
-                <div style={{ color: "black", fontSize: "18px", fontWeight: "500", cursor: "pointer" }}>Services</div>
-                <ul className='nav-sub' style={{ listStyleType: 'none', cursor: "pointer" }}>
-                  <li className='ml-2'><Link to="/home/cat">Paint Repair</Link></li>
-                  <li className='ml-2'><Link to="/home/subcat">Bathroom</Link></li>
-                  <li className='ml-2'>Exhaust Fan</li>
-                </ul>
+                <LinkScroll
+                  style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
+                  to="serve"
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
+                  onClick={() => handleClick('serve')}
+                >
+                    Services
+                </LinkScroll>
               </NavItem>
             </Nav>
           </MediaQuery>

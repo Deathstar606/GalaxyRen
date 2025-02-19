@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { StaggeredText } from "./TextAnimate";
 import demo1 from "../images/Hero Slider/1000_F_588238455_Q6IkVMMaomoWuD66ijiY2sgDPCi2cpPl.jpg";
 import demo2 from "../images/Hero Slider/1695810787-img2-banner-blog-1a.jpg";
@@ -8,7 +8,8 @@ import MediaQuery from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, Row, Col } from "react-bootstrap";
 
-const backgrounds = ["green", "lightblue", "orange"];
+const heading = ["green", "lightblue", "orange"];
+const butts = ["butt1", "butt2", "butt3"];
 const texts = ["hello", "good bye", "see you later"];
 const images = [demo1, demo2, demo3];
 
@@ -16,10 +17,16 @@ const HeroSec = () => {
   const [index, setIndex] = useState(0);
   const [style, setStyle] = useState({ transform: "translate(0, 0)" });
 
+/*   useEffect(() => {
+    const interval = setInterval(handleNext, 6000);
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []); // Empty dependency array ensures it runs once on mount */
+
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * -20;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -20;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * -30;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -30;
 
     setStyle({ transform: `translate(${x}px, ${y}px)` });
   };
@@ -39,7 +46,7 @@ const HeroSec = () => {
   return (
     <Container fluid>
       <MediaQuery maxWidth={639}>
-        <Row style={{ minHeight: "100vh" }}>
+        <Row>
           <Col md={6} xs={12} className="p-0 home-butt" style={{ position: "relative", backgroundColor: "#00084c" }}>
             <AnimatePresence mode="wait">
               <motion.div
@@ -51,12 +58,13 @@ const HeroSec = () => {
                 style={{
                   padding: "20vh 5vh",
                   position: "relative",
-                  minHeight: "50vh", 
+                  height: "50vh", 
                 }}
                 onMouseMove={handleMouseMove}
                 onMouseLeave={handleMouseLeave}
               >
                 <motion.h1
+                  className="text-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   style={{
@@ -66,10 +74,10 @@ const HeroSec = () => {
                     color: "#fff",
                   }}
                 >
-                  Big Heading
+                  {heading[index]}
                 </motion.h1>
                 <motion.p
-                  className="text-white"
+                  className="text-white text-center"
                   style={{
                     ...style,
                     paddingLeft: "10px",
@@ -78,8 +86,10 @@ const HeroSec = () => {
                 >
                   <StaggeredText key={texts[index]} text={texts[index]} />
                 </motion.p>
-                <div className="mt-3 butt" style={{ display: "inline-block" }}>
-                  Hello
+                <div className="d-flex justify-content-center">
+                  <div className="mt-3 butt" style={{ display: "inline-block" }}>
+                    {butts[index]}
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -164,7 +174,7 @@ const HeroSec = () => {
                   color: "#fff",
                 }}
               >
-                Big Heading
+                {heading[index]}
               </motion.h1>
               <motion.p
                 className="text-white"
@@ -177,7 +187,7 @@ const HeroSec = () => {
                 <StaggeredText key={texts[index]} text={texts[index]} />
               </motion.p>
               <div className="mt-3 butt" style={{ display: "inline-block" }}>
-                Hello
+                {butts[index]}
               </div>
             </motion.div>
           </AnimatePresence>

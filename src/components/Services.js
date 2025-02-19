@@ -69,7 +69,7 @@ function Service ({services}) {
   if (services.services) {
     return (
       <>
-      <h1 className="text-center mt-4 pt-4"><StaggeredText text={"DEMO HEADER TEXT"}/></h1>
+      <h1 className="text-center mt-4 pt-4" id="serve"><StaggeredText text={"Our Services"}/></h1>
       <p className="text-center mt-2 pb-4">View our services</p>
       <Container>
         <Row>

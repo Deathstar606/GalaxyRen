@@ -32,7 +32,7 @@ const handleNavLinkClick = (to) => {
   return (
     <div>
       <div className="burger-menu">
-        <div className="burger-icon" onClick={toggleMenu}>
+        <div className="burger-icon" style={{position: "fixed", right: 20, top: 40, zIndex: 1001}} onClick={toggleMenu}>
           <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
           <div className={`bar ${menuOpen ? 'open' : ''}`}></div>
           <div className={`bar ${menuOpen ? 'open' : ''}`}></div>

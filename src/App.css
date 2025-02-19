@@ -41,10 +41,19 @@ body {
 
 .nav-ele:hover {
   border-bottom: 2px solid #b61414;
-  .nav-sub {
-    opacity: 1;
-    z-index: 99;
-    margin-top: 6px;
+}
+
+.active_nav {
+  border-bottom: 2px solid #b61414;
+}
+
+.tool_container {
+  max-width: 80%;
+}
+
+@media (max-width: 639px) {
+  .tool_container {
+    max-width: 100%;
   }
 }
 
@@ -68,6 +77,12 @@ body {
   }
   .nav-container {
     max-width: 88.5%;
+  }
+}
+
+@media (min-width: 640px) {
+  .est-container {
+    min-width: 70%;
   }
 }
 
@@ -201,6 +216,12 @@ body {
   display: block;
   transform: translateY(-100px);
   opacity: 0;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  top: 90%;  /* Center vertically */
+  transform: translateY(-50%);  /* Adjust to exact center */
 }
 
 .swiper-pagination {

@@ -9,6 +9,7 @@ import {
   Container
 } from 'reactstrap';
 import { motion } from 'framer-motion';
+import { MdOutlineCancel } from "react-icons/md";
 import { StaggeredText } from './TextAnimate';
 
 const Estimation = () => {
@@ -53,9 +54,9 @@ const Estimation = () => {
     initial = {{x: 1000, opacity: 0}}
     animate= {{x: 0, opacity: 1}}
     exit= {{x: -1000, opacity: 0}}>
-      <Container style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <div className='pl-3 pr-3'>
-        <h1 className='text-center p-5'><StaggeredText text={"Get An Estimation of our services"}/></h1>
+      <Container style={{ display: "flex", alignItems: "center", justifyContent: "center"}}>
+        <div className='pl-3 pr-3 est-container' id='freest'>
+        <h1 className='text-center p-4'><StaggeredText text={"Get An Estimation"}/></h1>
         <Row style={{border: "1px solid grey", borderRadius: "15px", padding: "20px"}}>
           <Col md={6} >
             <Dropdown isOpen={dropdownOpen} toggle={toggleDropdown}>
@@ -86,11 +87,11 @@ const Estimation = () => {
               {selectedServices.length > 0 ? (
                 selectedServices.map((service) => (
                   <div key={service.id} className="d-flex align-items-center">
-                    <span>{service.label} - ${service.price}</span>
+                    <span className='mt-1'>{service.label} - ${service.price}</span>
                     <span
                       className="ml-2"
                       onClick={() => handleRemoveService(service.id)}>
-                          ❌
+                          <MdOutlineCancel color='#00084c' size={20}/>
                     </span>
                   </div>
                 ))
