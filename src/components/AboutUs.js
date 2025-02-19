@@ -2,6 +2,7 @@ import React from "react";
 import aboutPic from "../images/HandymanServices-Part-3-Image.jpg"
 import { motion } from "framer-motion";
 import { Col, Container, Row, CardImg } from "reactstrap";
+import { Link } from "react-router-dom";
 
 function About() {
     return (
@@ -15,9 +16,10 @@ function About() {
                 style={{ minHeight: "100vh" }}
                 className="d-flex align-items-center justify-content-center"
             >
-                <Row className="w-100">
+                <Row className="w-100 pb-5">
                     <Col md={6} className="d-flex justify-content-center">
                         <motion.div
+                        className="mb-4"
                         style={{width: "100%"}}
                         initial = {{x: -50, opacity: 0}}
                         transition={{duration: 1, type: "tween", ease: "easeIn"}}
@@ -38,7 +40,11 @@ function About() {
                                 commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
                                 velit esse cillum dolore eu fugiat nulla pariatur.
                             </p>
-                            <div style={{display: "inline-block"}} className="butt">Contact</div>
+                            <div style={{display: "inline-block"}} className="butt">
+                                <Link to="/home/contactus">
+                                    Contact
+                                </Link>
+                            </div>
                         </div>
                     </Col>
                 </Row>

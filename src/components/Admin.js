@@ -87,23 +87,21 @@ const Admin = (props) => {
       );
   })
   
-  const tools = props.tools.tool.map((tool, index) => {
-    return (
-      <>
-        <Col md={6} key={index}>
-          <h4>{tool.name}</h4>
-          <p>{tool.description}</p>
-          <p>1 hour: {tool.prices[0]}</p>
-          <p>4 hours: {tool.prices[1]}</p>
-          <p>1 day: {tool.prices[2]}</p>
-          <p>1 week: {tool.prices[3]}</p>
-        </Col>
-        <Col md={6}>
-          <CardImg src={baseUrl + tool.image}/>
-        </Col>
-      </>
-    )
-  })
+  const tools = props.tools.tool.map((tool, index) => (
+    <Col md={4} key={index} className="mb-3">
+      <Card>
+        <CardImg top src={baseUrl + tool.image} alt={tool.name} />
+        <CardBody>
+          <CardTitle tag="h4">{tool.name}</CardTitle>
+          <CardText>{tool.description}</CardText>
+          <CardText>1 hour: {tool.prices[0]}</CardText>
+          <CardText>4 hours: {tool.prices[1]}</CardText>
+          <CardText>1 day: {tool.prices[2]}</CardText>
+          <CardText>1 week: {tool.prices[3]}</CardText>
+        </CardBody>
+      </Card>
+    </Col>
+  ));
 
   const handleChangeAdmin = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
@@ -115,19 +113,40 @@ const Admin = (props) => {
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 mb-5">
       {props.auth.isAuthenticated ? (
-        <div>
+        <div style={{position: "relative"}}>
+          <div 
+              style={{ 
+                  position: "absolute", 
+                  top: "-60px",  // Ensure it's at the top
+                  right: "20px", // Ensure it's at the right
+                  display: "flex", 
+                  alignItems: "center",
+                  gap: "10px" // Adds space between username and logout
+              }}
+          >
+              <div className="mt-1">{props.auth.user.username}</div>
+              <div 
+                  style={{ cursor: "pointer" }} 
+                  className="butt" 
+                  onClick={props.logoutUser}
+              >
+                  Logout
+              </div>
+          </div>
             <h1 className="text-center">Admin Page</h1>
             <Container>
-              <Row>
+              <Row className="p-5">
                 <Col md={3} xs={6}>
                     <div 
-                        style={{ 
-                            backgroundColor: activeTab === "messages" ? "black" : "white", 
-                            color: activeTab === "messages" ? "white" : "black" 
+                        style={{
+                            borderRadius: "15px", 
+                            marginBottom: "15px",
+                            backgroundColor: activeTab === "messages" ? "#00084c" : "white", 
+                            color: activeTab === "messages" ? "white" : "#00084c" 
                         }} 
-                        className="border rounded p-3 text-center" 
+                        className="border p-3 text-center" 
                         onClick={() => setActiveTab("messages")}
                     >
                         Messages
@@ -135,11 +154,12 @@ const Admin = (props) => {
                 </Col>
                 <Col md={3} xs={6}>
                     <div 
-                        style={{ 
-                            backgroundColor: activeTab === "services" ? "black" : "white", 
-                            color: activeTab === "services" ? "white" : "black" 
+                        style={{
+                            borderRadius: "15px", 
+                            backgroundColor: activeTab === "services" ? "#00084c" : "white", 
+                            color: activeTab === "services" ? "white" : "#00084c" 
                         }} 
-                        className="border rounded p-3 text-center" 
+                        className="border p-3 text-center" 
                         onClick={() => setActiveTab("services")}
                     >
                         Services
@@ -148,10 +168,11 @@ const Admin = (props) => {
                 <Col md={3} xs={6}>
                     <div 
                         style={{ 
-                            backgroundColor: activeTab === "tools" ? "black" : "white", 
-                            color: activeTab === "tools" ? "white" : "black" 
+                            borderRadius: "15px",
+                            backgroundColor: activeTab === "tools" ? "#00084c" : "white", 
+                            color: activeTab === "tools" ? "white" : "#00084c" 
                         }} 
-                        className="border rounded p-3 text-center" 
+                        className="border p-3 text-center" 
                         onClick={() => setActiveTab("tools")}
                     >
                         Tools
@@ -160,10 +181,14 @@ const Admin = (props) => {
                 <Col md={3} xs={6}>
                     <div 
                         style={{ 
-                            backgroundColor: activeTab === "reservations" ? "black" : "white", 
-                            color: activeTab === "reservations" ? "white" : "black" 
+                            borderRadius: "15px",
+                            whiteSpace: "nowrap",
+                            textOverflow: "ellipsis",
+                            overflow: "hidden",
+                            backgroundColor: activeTab === "reservations" ? "#00084c" : "white", 
+                            color: activeTab === "reservations" ? "white" : "#00084c" 
                         }} 
-                        className="border rounded p-3 text-center" 
+                        className="border p-3 text-center" 
                         onClick={() => setActiveTab("reservations")}
                     >
                         Reservations
@@ -171,55 +196,56 @@ const Admin = (props) => {
                 </Col>
               </Row>
               {activeTab === "messages" && (
-                <Row> {contacts} </Row>
+                <Row className="pt-4"> {contacts} </Row>
               )}
               {activeTab === "services" && (
                 <>
-                  <Row> {services} </Row>
+                  <Row className="pt-4"> {services} </Row>
                   <ServiceForm />
                 </>
               )}
               {activeTab === "tools" && (
                 <>
-                  <Row> {tools} </Row>
+                  <Row className="pt-4"> {tools} </Row>
                   <ToolsForm/>
                 </>
               )}
               {activeTab === "reservations" && (
-                  <Row> {reservations} </Row>
+                  <Row className="pt-4"> {reservations} </Row>
               )}    
             </Container>
-            <div style={{display: "inline-block"}} className="butt" onClick={props.logoutUser}>Logout</div>
         </div>
       ) : (
-        <Form onSubmit={handleSubmitAdmin} className="p-4 border rounded shadow">
-          <h2 className="mb-4">Admin Login</h2>
-          <FormGroup>
-            <Label for="username">Username</Label>
-            <Input
-              type="text"
-              name="username"
-              id="username"
-              value={credentials.username}
-              onChange={handleChangeAdmin}
-              required
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label for="password">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="password"
-              value={credentials.password}
-              onChange={handleChangeAdmin}
-              required
-            />
-          </FormGroup>
-          <Button className="butt" type="submit">
-            Login
-          </Button>
-        </Form>
+        <Container className="p-4">
+          <Form onSubmit={handleSubmitAdmin} className="p-4 border rounded shadow">
+            <h2 className="mb-4 text-center">Admin Login</h2>
+            <FormGroup>
+              <Label for="username">Username</Label>
+              <Input
+                type="text"
+                name="username"
+                id="username"
+                value={credentials.username}
+                onChange={handleChangeAdmin}
+                required
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="password">Password</Label>
+              <Input
+                type="password"
+                name="password"
+                id="password"
+                value={credentials.password}
+                onChange={handleChangeAdmin}
+                required
+              />
+            </FormGroup>
+            <Button className="butt" type="submit">
+              Login
+            </Button>
+          </Form>
+        </Container>
       )}
     </div>
   );

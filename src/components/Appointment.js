@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Row, Form, FormGroup, Label, Input, Container, Col, CardImg, Button } from 'reactstrap';
 import { baseUrl } from '../shared/baseurl';
 import axios from 'axios';
-import contact from "../images/hero-image.fill.size_1248x702.v1703441414.jpg"
+import contact from "../images/photo-1623685462866-1f6fd75d0f25.avif"
 
 const AppointmentForm = () => {
     const [formData, setFormData] = useState({
@@ -128,26 +128,25 @@ const AppointmentForm = () => {
                     </AnimatePresence>
                 </Form>
         </Container>
-                <Row className="w-100" style={{backgroundColor: "#00084c", padding: "4rem"}}>
-                    <Col md={6} className="d-flex justify-content-center">
-                        <CardImg
-                            src={contact}
-                            style={{ objectFit: "cover", maxHeight: "100%", maxWidth: "100%" }}
-                        ></CardImg>
-                    </Col>
-                    <Col md={6} className="d-flex align-items-center">
-                        <div className='home-butt'>
-                            <p className='text-white'>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse cillum dolore eu fugiat nulla pariatur.
-                            </p>
-                            <div style={{display: "inline-block"}} className="butt">Contact</div>
-                        </div>
-                    </Col>
-                </Row>
+        <Container fluid>
+            <Row style={{backgroundColor: "#00084c", padding: "2rem"}}>
+                <Col md={6} className="d-flex justify-content-center align-items-center">
+                    <CardImg
+                        src={contact}
+                        style={{ objectFit: "cover", maxHeight: "80%", maxWidth: "80%", borderRadius: "15px" }}
+                    ></CardImg>
+                </Col>
+                <Col md={6} className="d-flex align-items-center">
+                    <p className='text-white'>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                        velit esse cillum dolore eu fugiat nulla pariatur.
+                    </p>
+                </Col>
+            </Row>
+        </Container>
         </motion.div>
     );
 };

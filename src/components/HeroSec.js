@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StaggeredText } from "./TextAnimate";
 import demo1 from "../images/Hero Slider/1000_F_588238455_Q6IkVMMaomoWuD66ijiY2sgDPCi2cpPl.jpg";
-import demo2 from "../images/Hero Slider/1695810787-img2-banner-blog-1a.jpg";
-import demo3 from "../images/Hero Slider/Feature-How-to-plan-a-house-renovation.jpg";
+import demo2 from "../images/hero-image.fill.size_1248x702.v1703441414.jpg";
+import demo3 from "../images/Measuring-for-remodeling.jpg";
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";
 import MediaQuery from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
 import { Container, Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Link as Scroll } from "react-scroll";
 
-const heading = ["green", "lightblue", "orange"];
-const butts = ["butt1", "butt2", "butt3"];
-const texts = ["hello", "good bye", "see you later"];
+const heading = ["Contact Us", "Tool Rental", "Estimation"];
+const butts = ["Contact", "Rent Tool", "Free Estimation"];
+const texts = ["Get in touch with tell us what we can do...", "Tool rental provides you varity of tools to rent...", "Get an estimation of our services..."];
 const images = [demo1, demo2, demo3];
+const links = ["/home/contactus", "/home/homed", "freest"]
 
 const HeroSec = () => {
   const [index, setIndex] = useState(0);
@@ -88,7 +91,15 @@ const HeroSec = () => {
                 </motion.p>
                 <div className="d-flex justify-content-center">
                   <div className="mt-3 butt" style={{ display: "inline-block" }}>
-                    {butts[index]}
+                    {index === 2 ? (
+                      <Scroll to={links[index]}>
+                        {butts[index]}
+                      </Scroll>
+                    ) : (
+                      <Link to={links[index]}>
+                        {butts[index]}
+                      </Link>
+                    )}
                   </div>
                 </div>
               </motion.div>
@@ -187,7 +198,15 @@ const HeroSec = () => {
                 <StaggeredText key={texts[index]} text={texts[index]} />
               </motion.p>
               <div className="mt-3 butt" style={{ display: "inline-block" }}>
-                {butts[index]}
+                {index === 2 ? (
+                  <Scroll to={links[index]}>
+                    {butts[index]}
+                  </Scroll>
+                  ) : (
+                  <Link to={links[index]}>
+                    {butts[index]}
+                  </Link>
+                )}
               </div>
             </motion.div>
           </AnimatePresence>

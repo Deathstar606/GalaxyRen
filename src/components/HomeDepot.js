@@ -147,7 +147,7 @@ function ToolDeats({ deats, handleHide }) {
                                     <h3>{deats.name}</h3>
                                     <p>{deats.description}</p>
                                     <Table>
-                                        <thead style={{ backgroundColor: "gray" }}>
+                                        <thead style={{ backgroundColor: "#00084c", color: "#ffffff" }}>
                                             <tr>
                                                 <th>4 Hour</th>
                                                 <th>1 Day</th>
