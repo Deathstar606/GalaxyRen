@@ -123,6 +123,26 @@ body {
   opacity: 0.7; /* Adjust as needed */
 }
 
+.homed_modal_container {
+  min-height: 50vh;
+  max-height: 90vh; /* Ensures content is contained */
+  background-color: white;
+  border-radius: 15px;
+  padding: 40px;
+  overflow-y: auto; /* Enables vertical scrolling */
+}
+
+@media (max-width: 639px) {
+  .homed_modal_container {
+    min-width: 90vw; /* Remove min-width restriction */
+  }
+}
+
+@media (min-width: 640px) {
+  .button_container {
+    display: flex;
+  }
+}
 
 .modal-back {
   position: fixed;

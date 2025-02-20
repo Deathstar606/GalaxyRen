@@ -12,13 +12,10 @@ import axios from "axios";
 import { baseUrl } from "../shared/baseurl";
 import { generateEmailHtml } from "../emails";
 
-import Head from "../images/HomeD/hero-image.fill.size_1248x702.v1703441414.jpg"
 import icon1 from "../images/HomeD/location.png"
 import icon2 from "../images/HomeD/tools.png"
 import icon3 from "../images/HomeD/user.png"
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -134,36 +131,38 @@ function ToolDeats({ deats, handleHide }) {
     return (
         <motion.div className="modal-back" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             <motion.div className="d-flex justify-content-center m-5" initial={{ opacity: 0, y: -500 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -500 }} transition={{ duration: 0.25, delay: 0.25 }}>
-                <Container style={{ minHeight: "50vh", backgroundColor: "white", borderRadius: "15px", padding: "40px" }}>
+                <Container className="homed_modal_container">
                     <button style={{ position: "absolute", top: "0px", right: "10px", background: "transparent", border: "none", fontSize: "40px", color: "white", cursor: "pointer" }} onClick={handleHide}>&times;</button>
 
                     {currentPanel === "1st" && (
                         <>
                             <Row>
-                                <Col md={6} className="d-flex align-items-center justify-content-center">
+                                <Col md={6} xs={12} className="d-flex align-items-center justify-content-center mb-3">
                                     <CardImg src={baseUrl + deats.image} />
                                 </Col>
-                                <Col md={6} style={{ border: "1px solid #ccc", borderRadius: "10px", padding: "15px" }}>
+                                <Col md={6} xs={12} style={{ border: "1px solid #ccc", borderRadius: "10px", padding: "15px" }}>
                                     <h3>{deats.name}</h3>
                                     <p>{deats.description}</p>
-                                    <Table>
-                                        <thead style={{ backgroundColor: "#00084c", color: "#ffffff" }}>
-                                            <tr>
-                                                <th>4 Hour</th>
-                                                <th>1 Day</th>
-                                                <th>1 Week</th>
-                                                <th>4 Weeks</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                {deats.prices.map((price, index) => (
-                                                    <td key={index}>{price} TK</td>
-                                                ))}
-                                            </tr>
-                                        </tbody>
-                                    </Table>
-                                    <div className="d-flex mb-1">
+                                    <div style={{ overflowX: "auto", whiteSpace: "nowrap", scrollbarWidth: "none" }}>
+                                        <Table>
+                                            <thead style={{ backgroundColor: "#00084c", color: "#ffffff" }}>
+                                                <tr>
+                                                    <th>4 Hour</th>
+                                                    <th>1 Day</th>
+                                                    <th>1 Week</th>
+                                                    <th>4 Weeks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    {deats.prices.map((price, index) => (
+                                                        <td key={index}>{price} TK</td>
+                                                    ))}
+                                                </tr>
+                                            </tbody>
+                                        </Table>
+                                    </div>
+                                    <div className="mb-1 button_container">
                                         <Dropdown isOpen={dropdownOpen1} toggle={toggleDropdown1}>
                                             <DropdownToggle caret className="butt">
                                                 Duration
@@ -200,7 +199,7 @@ function ToolDeats({ deats, handleHide }) {
 
                     {currentPanel === "2nd" && (
                         <Row>
-                            <Col md={6} className="d-flex align-items-center justify-content-center">
+                            <Col md={6} className="d-flex align-items-center justify-content-center mb-3">
                                 <CardImg src={baseUrl + deats.image} />
                             </Col>
                             <Col md={6}>
@@ -317,7 +316,7 @@ function HomeD ({tools}) {
             <h1 className="p-5 text-center">Rent the product</h1>
             <Row className="g-1" style={{ justifyContent: 'center', margin: "0" }}>
                 {tools.tool.map((tl, index) => (
-                    <Col md={3} xs={6} key={index} style={{ display: "flex", justifyContent: "center", padding: "2.5px" }}>
+                    <Col md={3} xs={12} key={index} style={{ display: "flex", justifyContent: "center", padding: "2.5px" }}>
                         <motion.div
                             whileHover={{ scale: 1.05 }}  // Scales the card a little on hover
                             transition={{ type: "spring", stiffness: 300 }}
