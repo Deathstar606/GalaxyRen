@@ -57,7 +57,7 @@ const Navbar = () => {
     <Container>
       <div className="nav-c">
         <BootstrapNavbar light expand="md">
-          <NavbarBrand href="/"><img className='logo' src={logo}/></NavbarBrand>
+          <NavbarBrand href="https://deathstar606.github.io/GalaxyRen/#/home"><img className='logo' src={logo}/></NavbarBrand>
           <MediaQuery maxWidth={639}>
             <Burger scrollFunc={handleClick}/>
           </MediaQuery>

@@ -67,24 +67,34 @@ const Main = (props) => {
     props.fetchContacts();
   }, []);
 
-  return (
-    <div>
-      <Example/>
-      <AnimatePresence mode="wait">
-        <Routes location={location} key={location.key}>
-          <Route path="/home" element={<Home services={props.services}/>} />
-          <Route path="/home/homed" element={<HomeD tools={props.tools}/>} />
-          <Route path="/home/cat" element={<Categories />} />
-          <Route path="/home/subcat" element={<CategoriesWsub />} />
-          <Route path="/home/aboutus" element={<About />} />
-          <Route path="/home/contactus" element={<AppointmentForm />} />
-          <Route path="/home/admin" element={<Admin auth={props.auth} services={props.services} tools={props.tools} reservations={props.reservations} contacts={props.contacts} loginUser={props.loginUser} logoutUser={props.logoutUser} />} />
-          <Route path="*" element={<Navigate to="/home" />} />
-        </Routes>
-      </AnimatePresence>
-      <Footer/>
-    </div>
-  );
+  if (props.services && props.tools) {
+    return (
+      <div>
+        <Example/>
+        <AnimatePresence mode="wait">
+          <Routes location={location} key={location.key}>
+            <Route path="/home" element={<Home services={props.services}/>} />
+            <Route path="/home/homed" element={<HomeD tools={props.tools}/>} />
+            <Route path="/home/cat" element={<Categories />} />
+            <Route path="/home/subcat" element={<CategoriesWsub />} />
+            <Route path="/home/aboutus" element={<About />} />
+            <Route path="/home/contactus" element={<AppointmentForm />} />
+            <Route path="/home/admin" element={<Admin auth={props.auth} services={props.services} tools={props.tools} reservations={props.reservations} contacts={props.contacts} loginUser={props.loginUser} logoutUser={props.logoutUser} />} />
+            <Route path="*" element={<Navigate to="/home" />} />
+          </Routes>
+        </AnimatePresence>
+        <Footer/>
+      </div>
+    );
+  }
+
+  else {
+    return (
+      <div style={{minHeight: "100vh"}} className='d-flex justify-content-center align-items-center'>
+        <h1>Please Wait While The Component Loads...</h1>
+      </div>
+    )
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);
