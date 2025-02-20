@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/GalaxyRen/static/css/main.a7920ea5.css",
-    "main.js": "/GalaxyRen/static/js/main.3c239b4e.js",
+    "main.css": "/GalaxyRen/static/css/main.f17b4002.css",
+    "main.js": "/GalaxyRen/static/js/main.d7ba2572.js",
     "static/js/787.65e671fe.chunk.js": "/GalaxyRen/static/js/787.65e671fe.chunk.js",
     "static/media/GALAXY_WEBSITE_Transparent.svg": "/GalaxyRen/static/media/GALAXY_WEBSITE_Transparent.0b9184e298b46ba1c98938aaeba62f15.svg",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/GalaxyRen/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
@@ -22,12 +22,12 @@
     "static/media/afterp.jpg": "/GalaxyRen/static/media/afterp.d903c72f63d748884f25.jpg",
     "static/media/beforep.jpg": "/GalaxyRen/static/media/beforep.0df795ae218d9142bf07.jpg",
     "index.html": "/GalaxyRen/index.html",
-    "main.a7920ea5.css.map": "/GalaxyRen/static/css/main.a7920ea5.css.map",
-    "main.3c239b4e.js.map": "/GalaxyRen/static/js/main.3c239b4e.js.map",
+    "main.f17b4002.css.map": "/GalaxyRen/static/css/main.f17b4002.css.map",
+    "main.d7ba2572.js.map": "/GalaxyRen/static/js/main.d7ba2572.js.map",
     "787.65e671fe.chunk.js.map": "/GalaxyRen/static/js/787.65e671fe.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a7920ea5.css",
-    "static/js/main.3c239b4e.js"
+    "static/css/main.f17b4002.css",
+    "static/js/main.d7ba2572.js"
   ]
 }
