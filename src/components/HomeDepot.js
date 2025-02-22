@@ -119,7 +119,7 @@ function ToolDeats({ deats, handleHide }) {
                 });
             })
             .then(emailResponse => {
-                console.log("Email sent successfully:", emailResponse.data);
+                alert("Reservation successful. An email has been sent to you.");
             })
             .catch(error => {
                 console.error("Error processing request:", error);
@@ -208,7 +208,6 @@ function ToolDeats({ deats, handleHide }) {
                                 <p>Duration: {formData.duration}</p>
                                 <p>Price: {formData.price} TK</p>
 
-                                {/* Name & Phone Number Fields (Side by Side) */}
                                 <Row className="mb-2">
                                     <Col>
                                         <input 
@@ -230,7 +229,6 @@ function ToolDeats({ deats, handleHide }) {
                                     </Col>
                                 </Row>
 
-                                {/* Email Field (Below Name & Phone) */}
                                 <Row className="mb-3">
                                     <Col>
                                         <input 
@@ -254,7 +252,7 @@ function ToolDeats({ deats, handleHide }) {
                                         <div className="butt" style={{display: "inline-block"}} onClick={() => {handleChange("charge", 10); handleChange("location", "Ottawa");}}>Ottawa (+$10)</div>
                                         <div className="butt" style={{display: "inline-block"}} onClick={() => {handleChange("charge", 15); handleChange("location", "Toronto");}}>Toronto (+$15)</div>
                                         <div className="butt" style={{display: "inline-block"}} onClick={() => {handleChange("charge", 20); handleChange("location", "Quebec");}}>Quebec (+$20)</div>
-                                        <div style={{cursor: "pointer"}} className="mt-2 mb-2" onClick={findMyLocation}>Find My Location <CiLocationOff /></div>
+                                        <div style={{cursor: "pointer", display: "inline-block"}} className="mt-2 mb-2 butt" onClick={findMyLocation}>Find My Location <CiLocationOff /></div>
                                         <p>Delivery Charge: ${formData.charge}</p>
                                         <div className="butt" style={{display: "inline-block"}} onClick={handleSubmit}>Confirm Reservation</div>
                                         <div className="butt" style={{display: "inline-block"}} onClick={handleRrev}>Go Back</div>
