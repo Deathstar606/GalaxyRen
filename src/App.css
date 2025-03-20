@@ -4,12 +4,17 @@ body {
 }
 
 .logo {
+  padding-top: 12px;
+  scale: 1.7;
   width: 150px; /* You can adjust the percentage as needed */
   height: 150px; /* This maintains the image's aspect ratio */
 }
 
 @media (max-width: 639px) {
   .logo {
+    padding-top: 7px;
+    padding-left: 7px;
+    scale: 2;
     width: 85px; /* You can adjust the percentage as needed */
     height: 85px; /* This maintains the image's aspect ratio */
   }

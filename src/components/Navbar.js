@@ -73,7 +73,7 @@ const Navbar = () => {
               </NavItem>
               <NavItem className='nav-ele'>
                 <LinkScroll
-                  style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
+                  style={{ color: "black", fontSize: "18px", fontWeight: "500", cursor: "pointer" }}
                   to="freest"
                   spy={true}
                   smooth={true}
@@ -102,7 +102,7 @@ const Navbar = () => {
               </NavItem>
               <NavItem className='nav-ele'>
                 <LinkScroll
-                  style={{ color: "black", fontSize: "18px", fontWeight: "500" }}
+                  style={{ color: "black", fontSize: "18px", fontWeight: "500", cursor: "pointer" }}
                   to="serve"
                   spy={true}
                   smooth={true}

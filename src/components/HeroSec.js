@@ -12,7 +12,7 @@ import { Link as Scroll } from "react-scroll";
 
 const heading = ["Contact Us", "Tool Rental", "Estimation"];
 const butts = ["Contact", "Rent Tool", "Free Estimation"];
-const texts = ["Get in touch with tell us what we can do...", "Tool rental provides you varity of tools to rent...", "Get an estimation of our services..."];
+const texts = ["Get in touch with us...", "Rent tools that suits your needs...", "Get an estimation of our services..."];
 const images = [demo1, demo2, demo3];
 const links = ["/home/contactus", "/home/homed", "freest"]
 
