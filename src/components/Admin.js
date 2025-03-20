@@ -16,7 +16,7 @@ const Admin = (props) => {
         <Card key={index} className="mb-3 p-3">
           <CardBody>
             <div className="service-image-container">
-              <CardImg src={baseUrl + serve.mainImg}/>
+              <CardImg src={serve.mainImg}/>
             </div>
             <CardText>Service Name: {serve.name}</CardText>
             <CardText>Description: {serve.description}</CardText>

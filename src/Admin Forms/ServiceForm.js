@@ -3,6 +3,25 @@ import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 import axios from "axios";
 import { baseUrl } from "../shared/baseurl";
 
+const uploadToCloudinary = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "galaxyReno_up"); // Replace with your Cloudinary upload preset
+    formData.append("folder", "galaxyReno/services");
+
+    try {
+        const response = await fetch("https://api.cloudinary.com/v1_1/drliblpx7/image/upload", {
+            method: "POST",
+            body: formData,
+        });
+        const data = await response.json();
+        return data.secure_url; // Return the uploaded image URL
+    } catch (error) {
+        console.error("Cloudinary Upload Error:", error);
+        return null;
+    }
+};
+
 const ServiceForm = () => {
     const [showForm, setShowForm] = useState(false);
     const [formData, setFormData] = useState({
@@ -40,31 +59,33 @@ const ServiceForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const data = new FormData();
-    
-        // Append text fields
-        data.append("name", formData.name);
-        data.append("description", formData.description);
-    
-        // Append main image
-        if (formData.mainImg) {
-            data.append("mainImg", formData.mainImg);
-        }
-    
-        // Append secondary images properly
-        formData.secondaryImg.forEach((file) => {
-            data.append("secondaryImg", file);
-        });
-    
-        const token = localStorage.getItem("token");
-    
         try {
-            const response = await axios.post(baseUrl + "services", data, {
+            // Upload main image
+            const mainImgUrl = formData.mainImg ? await uploadToCloudinary(formData.mainImg) : null;
+    
+            // Upload secondary images
+            const secondaryImgUrls = await Promise.all(
+                formData.secondaryImg.map((file) => uploadToCloudinary(file))
+            );
+    
+            const token = localStorage.getItem("token");
+    
+            // Prepare JSON payload with Cloudinary image URLs
+            const requestData = {
+                name: formData.name,
+                description: formData.description,
+                mainImg: mainImgUrl,
+                secondaryImg: secondaryImgUrls.filter((url) => url !== null), // Remove failed uploads
+            };
+    
+            // Send only URLs to backend
+            const response = await axios.post(baseUrl + "services", requestData, {
                 headers: {
-                    "Content-Type": "multipart/form-data",
-                    "Authorization": `bearer ${token}`,
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
                 },
             });
+    
             console.log("Success:", response.data);
         } catch (error) {
             console.error("Error:", error.response ? error.response.data : error);

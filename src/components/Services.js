@@ -44,7 +44,7 @@ function ShowDescription ({ desp, handleHide }) {
                     {desp.secondaryImg.map((img, index) => (
                       <SwiperSlide key={index}>
                         <div className="service-image-container">
-                          <CardImg src={baseUrl + img} style={{borderRadius: "15px"}}/>
+                          <CardImg src={img} style={{borderRadius: "15px"}}/>
                         </div>
                       </SwiperSlide>
                     ))}
@@ -84,7 +84,7 @@ function Service ({services}) {
                 whileHover={{scale: 1.04}}
                 viewport={{ once: true }}>
                       <div className="service-image-container">
-                        <CardImg src={baseUrl + service.mainImg}/>
+                        <CardImg src={service.mainImg}/>
                         <div className="cat-body">
                           <div className="butt" style={{fontSize: "17px"}} onClick={() => handleShow(service)}>
                             Learn More
