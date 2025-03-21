@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import { Row, Col, Button, Form, FormGroup, Label, Input, Container, CardImg, Card, CardBody, CardTitle, CardText } from "reactstrap";
 import ServiceForm from "../Admin Forms/ServiceForm";
-import { baseUrl } from "../shared/baseurl";
 import ToolsForm from "../Admin Forms/ToolsForm";
+import { baseUrl } from "../shared/baseurl";
+import axios from "axios";
 
 const Admin = (props) => {
   
+  const deleteService = async (id) => {
+
+    const token = localStorage.getItem("token");
+
+      try {
+          const deletereq = await axios.delete(`${baseUrl}services/${id}`, { 
+              headers: {
+                  "Content-Type": "application/json",
+                  "Authorization": `Bearer ${token}`,
+              },
+          });
+          console.log("Delete Successful:", deletereq.data);
+      } catch (error) {
+          console.error("Delete Error:", error.response ? error.response.data : error);
+      }
+  };
+
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [activeTab, setActiveTab] = useState("messages");
 
@@ -20,6 +38,9 @@ const Admin = (props) => {
             </div>
             <CardText>Service Name: {serve.name}</CardText>
             <CardText>Description: {serve.description}</CardText>
+            <div className="butt" style={{display: "inline-block"}} onClick={() => deleteService(serve._id)}>
+              Delete Service
+            </div>
           </CardBody>
         </Card>
       </Col>

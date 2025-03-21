@@ -12,12 +12,15 @@ import axios from "axios";
 import { baseUrl } from "../shared/baseurl";
 import { generateEmailHtml } from "../emails";
 
-import icon1 from "../images/HomeD/location.png"
-import icon2 from "../images/HomeD/tools.png"
-import icon3 from "../images/HomeD/user.png"
+import icon1 from "../images/Rent Page/age.jfif"
+import icon2 from "../images/Rent Page/card.jfif"
+import icon3 from "../images/Rent Page/location.jfif"
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
 import "swiper/css";
 import "swiper/css/navigation";
+import MediaQuery from "react-responsive";
 
 function ToolDeats({ deats, handleHide }) {
     const [formData, setFormData] = useState({
@@ -288,29 +291,52 @@ function HomeD ({tools}) {
           <h1 className="text-center mt-5 mb-2"><StaggeredText text={"Tool Rental"}/></h1>
           <h6 className="text-center pb-4 mb-4">Sub Heading for Tool Rental</h6>
           <Container className="tool_container">
-            <Row className="pt-4 mt-4" style={{justifyContent: 'center', margin: "0"}}>
-                <Col md={4} xs={6} className="d-flex justify-content-center">
-                    <div>
-                        <CardImg src={icon3} style={{width: "150px"}}></CardImg>
-                        <p className="text-center m-0 pt-4">sub pointer 1</p>
-                        <p className="text-center">sub pointer 2</p>
-                    </div>
-                </Col>
-                <Col md={4} xs={6} className="d-flex justify-content-center">
-                    <div>
-                        <CardImg src={icon2} style={{width: "150px"}}></CardImg>
-                        <p className="text-center m-0 pt-4">sub pointer 1</p>
-                        <p className="text-center">sub pointer 2</p>
-                    </div>
-                </Col>
-                <Col md={4} xs={6} className="d-flex justify-content-center">
-                    <div>
-                        <CardImg src={icon1} style={{width: "150px"}}></CardImg>
-                        <p className="text-center m-0 pt-4">sub pointer 1</p>
-                        <p className="text-center">sub pointer 2</p>
-                    </div>
-                </Col>
-            </Row>
+            <MediaQuery minWidth={640}>
+                <Row className="pt-4 mt-4" style={{justifyContent: 'center', margin: "0"}}>
+                    <Col md={4} xs={6}>
+                        <div className="d-flex justify-content-center">
+                            <CardImg src={icon3} style={{width: "65%"}}></CardImg>
+                        </div>
+                        <p className="text-center m-0">Rentals must be returned to the same location</p>
+                    </Col>
+                    <Col md={4} xs={6}>
+                        <div className="d-flex justify-content-center">
+                            <CardImg src={icon2} style={{width: "65%"}}></CardImg>
+                        </div>
+                        <p className="text-center m-0">Have a valid credit card for the a deposit at the time of pick-up</p>
+                    </Col>
+                    <Col md={4} xs={6}>
+                        <div className="d-flex justify-content-center">
+                            <CardImg src={icon1} style={{width: "65%"}}></CardImg>
+                        </div>
+                        <p className="text-center m-0">Must be at least 18 years old</p>
+                        <p className="text-center m-0 pt-2">Have a government-issued photo ID that is valid at the time of rental</p>
+                    </Col>
+                </Row>
+            </MediaQuery>
+            <MediaQuery maxWidth={640}>
+                <Swiper
+                modules={[Autoplay]}
+                spaceBetween={20}
+                slidesPerView={1}
+                pagination={{ clickable: true }}
+                autoplay={{ delay: 3000 }}
+                >
+                    <SwiperSlide className="p-2">
+                        <CardImg src={icon3} alt="Rental return policy"/>
+                        <p className="mt-2 text-center">Rentals must be returned to the same location</p>
+                    </SwiperSlide>
+                    <SwiperSlide className="p-2">
+                        <CardImg src={icon2} alt="Credit card requirement"/>
+                        <p className="mt-2 text-center">Have a valid credit card for a deposit at the time of pick-up</p>
+                    </SwiperSlide>
+                    <SwiperSlide className="p-2">
+                        <CardImg src={icon1} alt="Age and ID requirement"/>
+                        <p className="mt-2 text-center">Must be at least 18 years old</p>
+                        <p className="mt-1 text-center">Have a government-issued photo ID that is valid at the time of rental</p>
+                    </SwiperSlide>
+                </Swiper>
+            </MediaQuery>
             <h1 className="p-5 text-center">Rent the product</h1>
             <Row className="g-1" style={{ justifyContent: 'center', margin: "0" }}>
                 {tools.tool.map((tl, index) => (

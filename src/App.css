@@ -13,7 +13,7 @@ body {
 @media (max-width: 639px) {
   .logo {
     padding-top: 7px;
-    padding-left: 7px;
+    margin-left: 17px;
     scale: 2;
     width: 85px; /* You can adjust the percentage as needed */
     height: 85px; /* This maintains the image's aspect ratio */
