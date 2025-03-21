@@ -197,13 +197,13 @@ const HeroSec = () => {
               >
                 <StaggeredText key={texts[index]} text={texts[index]} />
               </motion.p>
-              <div className="mt-3 butt" style={{ display: "inline-block" }}>
+              <div className="mt-3 butt" style={{ display: "inline-block" }}>  
                 {index === 2 ? (
                   <Scroll to={links[index]}>
                     {butts[index]}
                   </Scroll>
                   ) : (
-                  <Link to={links[index]}>
+                  <Link style={{textDecoration: "none", color: "inherit"}} to={links[index]}>
                     {butts[index]}
                   </Link>
                 )}
