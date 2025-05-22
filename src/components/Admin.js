@@ -8,19 +8,23 @@ import axios from "axios";
 const Admin = (props) => {
   
   const deleteService = async (id) => {
+      const confirmed = window.confirm("Are you sure you want to delete this service?");
+      if (!confirmed) return;
 
-    const token = localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       try {
-          const deletereq = await axios.delete(`${baseUrl}services/${id}`, { 
+          const deletereq = await axios.delete(`${baseUrl}services/${id}`, {
               headers: {
                   "Content-Type": "application/json",
                   "Authorization": `Bearer ${token}`,
               },
           });
           console.log("Delete Successful:", deletereq.data);
+          alert("Service deleted successfully!");
       } catch (error) {
           console.error("Delete Error:", error.response ? error.response.data : error);
+          alert("Failed to delete the service. Please try again.");
       }
   };
 
@@ -36,7 +40,7 @@ const Admin = (props) => {
             <div className="service-image-container">
               <CardImg src={serve.mainImg}/>
             </div>
-            <CardText>Service Name: {serve.name}</CardText>
+            <CardText className="mt-4">Service Name: {serve.name}</CardText>
             <CardText>Description: {serve.description}</CardText>
             <div className="butt" style={{display: "inline-block"}} onClick={() => deleteService(serve._id)}>
               Delete Service

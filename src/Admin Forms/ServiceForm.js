@@ -28,8 +28,10 @@ const ServiceForm = () => {
         name: "",
         description: "",
         mainImg: null,
-        secondaryImg: []
+/*         secondaryImg: [] */
     });
+
+    const [loading, setLoading] = useState(false);
 
     const toggleForm = () => {
         setShowForm(!showForm);
@@ -45,37 +47,19 @@ const ServiceForm = () => {
         setFormData({ ...formData, mainImg: file });
     };
 
-    const handleSecondaryImagesChange = (e) => {
-        const files = Array.from(e.target.files);
-        const totalFiles = formData.secondaryImg.length + files.length;
-    
-        if (totalFiles > 3) {
-            alert("You can only select up to 3 images.");
-            return;
-        }
-    
-        setFormData({ ...formData, secondaryImg: [...formData.secondaryImg, ...files] });
-    };    
-
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true); // Start loading
         try {
             // Upload main image
             const mainImgUrl = formData.mainImg ? await uploadToCloudinary(formData.mainImg) : null;
     
-            // Upload secondary images
-            const secondaryImgUrls = await Promise.all(
-                formData.secondaryImg.map((file) => uploadToCloudinary(file))
-            );
-    
             const token = localStorage.getItem("token");
-    
-            // Prepare JSON payload with Cloudinary image URLs
+
             const requestData = {
                 name: formData.name,
                 description: formData.description,
                 mainImg: mainImgUrl,
-                secondaryImg: secondaryImgUrls.filter((url) => url !== null), // Remove failed uploads
             };
     
             // Send only URLs to backend
@@ -87,8 +71,11 @@ const ServiceForm = () => {
             });
     
             console.log("Success:", response.data);
+            alert("Service uploaded successfully!");
         } catch (error) {
             console.error("Error:", error.response ? error.response.data : error);
+        } finally {
+            setLoading(false); // Stop loading
         }
     };    
 
@@ -108,23 +95,12 @@ const ServiceForm = () => {
                         <Input type="textarea" name="description" id="description" value={formData.description} onChange={handleChange} required />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="mainImg">Upload Main Image:</Label>
+                        <Label for="mainImg">Upload Service Image:</Label>
                         <Input type="file" id="mainImg" onChange={handleMainImageChange} accept="image/*" required />
                     </FormGroup>
-                    <FormGroup>
-                        <Label for="secondaryImg">Upload Secondary Images (Max: 3):</Label>
-                        <Input type="file" id="secondaryImg" onChange={handleSecondaryImagesChange} accept="image/*" multiple required />
-                        <div>
-                            {formData.secondaryImg.length > 0 && (
-                                <ul>
-                                    {formData.secondaryImg.map((file, index) => (
-                                        <li key={index}>{file.name}</li>
-                                    ))}
-                                </ul>
-                            )}
-                        </div>
-                    </FormGroup>
-                    <Button type="submit" className="butt">Submit</Button>
+                    <Button type="submit" disabled={loading} className="butt">
+                        {loading ? "Uploading Please Wait..." : "Submit"}
+                    </Button>
                 </Form>
             )}
         </div>
