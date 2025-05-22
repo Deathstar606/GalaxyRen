@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Row, Form, FormGroup, Label, Input, Container, Col, CardImg, Button } from 'reactstrap';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { baseUrl } from '../shared/baseurl';
 import axios from 'axios';
-import contact from "../images/photo-1623685462866-1f6fd75d0f25.avif"
+import contact from "../images/contact.jpg"
 
 const AppointmentForm = () => {
     const [formData, setFormData] = useState({
@@ -128,25 +129,42 @@ const AppointmentForm = () => {
                     </AnimatePresence>
                 </Form>
         </Container>
-        <Container fluid>
-            <Row style={{backgroundColor: "#00084c", padding: "2rem"}}>
-                <Col md={6} className="d-flex justify-content-center align-items-center">
-                    <CardImg
-                        src={contact}
-                        style={{ objectFit: "cover", maxHeight: "80%", maxWidth: "80%", borderRadius: "15px" }}
-                    ></CardImg>
-                </Col>
-                <Col md={6} className="d-flex align-items-center">
-                    <p className='text-white'>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                        velit esse cillum dolore eu fugiat nulla pariatur.
-                    </p>
-                </Col>
-            </Row>
-        </Container>
+        <div style={{backgroundColor: "#00084c",}}>
+            <Container style={{minWidth: "65vw"}}>
+                <Row className='pt-5 pb-4' style={{padding: "1rem"}}>
+                    <Col md={6} className="d-flex justify-content-center align-items-center">
+                        <CardImg
+                            className="mb-4"
+                            src={contact}
+                            style={{ objectFit: "cover", width: "100%", borderRadius: "15px" }}
+                        ></CardImg>
+                    </Col>
+                    <Col md={6} className="d-flex align-items-center">
+                        <div>
+                            <p className='text-white'>
+                                Have a question, need a quote, or ready to book a service? We’re here to help! At Galaxy Home Solutions, we take pride in fast responses, clear communication, and reliable service—every time.
+                            </p>
+                            <div className='mt-5'>
+                                <a href="tel:416123-4567" style={{ color: 'white', textDecoration: 'none' }}>
+                                    <div className="d-flex align-items-center gap-2 mb-2">
+                                        <span className='mr-2'>Phone/Text:</span>
+                                        <span className="fw-semibold">416 123-4567</span>
+                                    </div>
+                                </a>
+                                <a href="mailto:solutionsgalaxyhome@gmail.com" target='blank' style={{ color: 'white', textDecoration: 'none' }}>
+                                    <div className="d-flex align-items-center gap-2 mb-2 pt-2">
+                                        <FaEnvelope className='mr-2' size={20} />
+                                        <span className="fw-semibold">solutionsgalaxyhome@gmail.com</span>
+                                    </div>
+                                </a>
+                                <p className='text-white pt-2'>📍 Service Area: Proudly serving Toronto, the GTA, and surrounding areas.</p>
+                                <p className='text-white'>Hours: Available 7 days a week</p>
+                            </div>                            
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
+        </div>
         </motion.div>
     );
 };

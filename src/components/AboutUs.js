@@ -34,12 +34,16 @@ function About() {
                     <Col md={6} className="d-flex align-items-center">
                         <div style={{color: "#d8d9da"}} className="home-butt">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                                veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                                commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse cillum dolore eu fugiat nulla pariatur.
+                                At Galaxy Home Solutions, we are a family-owned business dedicated to providing trusted, reliable, and high-quality home renovations and handyman services. With a passion for craftsmanship and a commitment to excellence, we take pride in transforming houses into homes with care, precision, and attention to detail.
                             </p>
+                            <p>
+                                From minor repairs to full renovations, our skilled team is here to help you with all your home improvement needs. We believe in honest work, transparent pricing, and customer satisfaction above all else. Whether it's installations, maintenance, electrical work, appliance repairs, or tool rentals, we bring professionalism and expertise to every project, no matter the size.
+                            </p>
+                            <p>
+                                At Galaxy Home Solutions, we treat your home like our own. Let us handle the hard work while you enjoy the results!
+                            </p>
+                            <div>📍 Serving Toronto and surrounding areas</div>
+                            <div className="mt-1 mb-3">📞 Contact us today for a free quote!</div>
                             <div style={{display: "inline-block"}} className="butt">
                                 <Link to="/home/contactus">
                                     Contact
