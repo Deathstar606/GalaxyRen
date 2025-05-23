@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StaggeredText } from "./TextAnimate";
-import demo1 from "../images/Hero Slider/1000_F_588238455_Q6IkVMMaomoWuD66ijiY2sgDPCi2cpPl.jpg";
+import demo1 from "../images/Hero Slider/contact.jpg";
 import demo2 from "../images/hero-image.fill.size_1248x702.v1703441414.jpg";
 import demo3 from "../images/Measuring-for-remodeling.jpg";
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from "react-icons/fa";

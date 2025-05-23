@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { FaFacebook } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaPhone, FaInstagram } from "react-icons/fa";
 import './Burger.css';
 
 const BurgerMenu = ({scrollFunc}) => {
@@ -104,8 +103,22 @@ const handleNavLinkClick = (to) => {
           </div>
           <li className='d-flex justify-content-center pt-4'>
             <div>
-              <FaFacebook color="#00084c" size={40} className='mr-3'/>
-              <FaWhatsapp color="#00084c" size={40} className='mr-3'/>
+              <a
+                href="https://www.facebook.com/profile.php?id=61574817508133"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#00084c' }}
+              >
+                <FaFacebook className='mr-3' size={30} />
+              </a>
+              <a
+                href="https://www.instagram.com/mynabackdrops"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#00084c' }}
+              >
+                <FaInstagram size={30} />
+              </a>
             </div>
           </li>
         </ul>

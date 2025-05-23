@@ -8,13 +8,13 @@ function Footer() {
       <Container className='pb-4 pt-4' style={{ maxWidth: "85%" }}>
         <Row className="mb-4">
           <Col>
-            <h2 className="fw-semibold">We're only one call away</h2>
+            <h4 className="fw-semibold">Trusted Handyman Service for Every Corner of Your House</h4>
           </Col>
         </Row>
 
         <Row className="mb-4 justify-content-center">
           <Col md={6} className="d-flex flex-column gap-3 align-items-center">
-            <a href="tel:4169976627" style={{ color: 'black', textDecoration: 'none' }}>
+            <a href="tel:6476062540" style={{ color: 'black', textDecoration: 'none' }}>
               <div className="d-flex align-items-center gap-2 mb-2">
                 <FaPhone className='mr-2' size={20} />
                 <span className="fw-semibold">416 997 6627 | 647 606 2540</span>

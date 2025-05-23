@@ -96,7 +96,7 @@ const Main = (props) => {
           borderRadius: '50%',
           boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)',
         }}>
-          <a href="tel:6476062540" style={{ color: 'blue', textDecoration: 'none' }}>
+          <a href="tel:6476062540" style={{ color: '#00084c', textDecoration: 'none' }}>
             <div className="d-flex align-items-center">
               <FaPhone size={20} />
             </div>
