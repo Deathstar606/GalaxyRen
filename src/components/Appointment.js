@@ -4,7 +4,7 @@ import { Row, Form, FormGroup, Label, Input, Container, Col, CardImg, Button } f
 import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
 import { baseUrl } from '../shared/baseurl';
 import axios from 'axios';
-import contact from "../images/contact.jpg"
+import contact from "../images/contact2.jpg"
 
 const AppointmentForm = () => {
     const [formData, setFormData] = useState({
