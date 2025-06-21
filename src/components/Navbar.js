@@ -7,7 +7,7 @@ import {
   Container,
 } from 'reactstrap';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import logo from "../images/GALAXY_WEBSITE_Transparent.svg";
+import logo from "../images/logo.jpg";
 import Burger from './Burger';
 import MediaQuery from 'react-responsive';
 import { Link as LinkScroll } from 'react-scroll';
