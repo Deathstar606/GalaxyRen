@@ -9,29 +9,41 @@ function ServiceCard({ service }) {
 
   return (
     <Col md={3} xs={6} className="m-0 g-0">
-      <motion.div 
+      <motion.div
         className="d-flex flex-column align-items-center justify-content-start text-center p-3"
-        style={{ minHeight: "300px", height: "100%", padding: "15px", borderRadius: "20px", backgroundColor: "#f9f9f9", boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)" }}
+        style={{
+          minHeight: "300px",
+          height: "100%",
+          padding: "15px",
+          borderRadius: "20px",
+          backgroundColor: "#f9f9f9",
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+        }}
         initial={{ y: 60, opacity: 0 }}
         animate={isInView ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        whileHover={{ scale: 1.1 }}>
-          <motion.div
-            ref={ref}
-            className="d-flex justify-content-center w-100"
-            initial={{ y: 60, opacity: 0 }}
-            animate={isInView ? { y: 0, opacity: 1 } : {}}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            whileHover={{ scale: 1.1, rotate: 3, transition: { type: "spring", stiffness: 250 } }}
-          >
-            <div className="service-image-container rounded-circle overflow-hidden">
-              <CardImg src={service.mainImg}/>
-            </div>
-          </motion.div>
-          <p className="text-center pt-3" style={{ fontWeight: "bold" }}>
-            {service.name}
-          </p>
-          <div className="text-center">{service.description}</div>
+        whileHover={{ scale: 1.1 }}
+      >
+        <motion.div
+          ref={ref}
+          className="d-flex justify-content-center w-100"
+          initial={{ y: 60, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : {}}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          whileHover={{
+            scale: 1.1,
+            rotate: 3,
+            transition: { type: "spring", stiffness: 250 },
+          }}
+        >
+          <div className="service-image-container rounded-circle overflow-hidden">
+            <CardImg src={service.mainImg} />
+          </div>
+        </motion.div>
+        <p className="text-center pt-3" style={{ fontWeight: "bold" }}>
+          {service.name}
+        </p>
+        <div className="text-center">{service.description}</div>
       </motion.div>
     </Col>
   );
@@ -46,10 +58,13 @@ function Service({ services }) {
       <p className="text-center mt-2 pb-4">View our services</p>
       <Container className="mb-5">
         <Row>
-          {services.services &&
-            services.services.map((service, index) => (
-              <ServiceCard service={service} key={index} />
-            ))}
+          {services.services?.length === 0 ? (
+            <h3 className="text-center w-100 mt-5 mb-5">Services Loading...</h3>
+          ) : (
+            services.services?.map((service, index) => (
+              <ServiceCard key={index} service={service} />
+            ))
+          )}
         </Row>
       </Container>
     </>
