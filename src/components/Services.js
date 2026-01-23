@@ -57,7 +57,7 @@ function Service({ services }) {
       </h1>
       <p className="text-center mt-2 pb-4">View our services</p>
       <Container className="mb-5">
-        <Row>
+        <Row className="d-flex justify-content-center">
           {services.services?.length === 0 ? (
             <h3 className="text-center w-100 mt-5 mb-5">Services Loading...</h3>
           ) : (

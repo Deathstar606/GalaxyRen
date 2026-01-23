@@ -21,7 +21,6 @@ function Moto() {
               delay: 0.5,
             }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
           >
             <Card style={{ borderRadius: "20px" }}>
               <CardBody>
@@ -53,7 +52,6 @@ function Moto() {
               delay: 0.5,
             }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
           >
             <Card style={{ borderRadius: "20px" }}>
               <CardBody>
@@ -84,7 +82,6 @@ function Moto() {
               delay: 0.5,
             }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true, amount: 0.5 }}
           >
             <Card style={{ borderRadius: "20px" }}>
               <CardBody>
