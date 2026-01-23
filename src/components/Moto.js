@@ -14,9 +14,14 @@ function Moto() {
           <motion.div
             className="m-2"
             initial={{ y: 50, opacity: 0 }}
-            transition={{ duration: 1, type: "tween", ease: "easeIn" }}
+            transition={{
+              duration: 1,
+              type: "tween",
+              ease: "easeIn",
+              delay: 0.5,
+            }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.5 }}
           >
             <Card style={{ borderRadius: "20px" }}>
               <CardBody>
@@ -41,9 +46,14 @@ function Moto() {
           <motion.div
             className="m-2"
             initial={{ y: 50, opacity: 0 }}
-            transition={{ duration: 1, type: "tween", ease: "easeIn" }}
+            transition={{
+              duration: 1,
+              type: "tween",
+              ease: "easeIn",
+              delay: 0.5,
+            }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.5 }}
           >
             <Card style={{ borderRadius: "20px" }}>
               <CardBody>
@@ -67,9 +77,14 @@ function Moto() {
           <motion.div
             className="m-2"
             initial={{ y: 50, opacity: 0 }}
-            transition={{ duration: 1, type: "tween", ease: "easeIn" }}
+            transition={{
+              duration: 1,
+              type: "tween",
+              ease: "easeIn",
+              delay: 0.5,
+            }}
             whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.5 }}
           >
             <Card style={{ borderRadius: "20px" }}>
               <CardBody>
