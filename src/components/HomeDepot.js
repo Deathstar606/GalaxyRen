@@ -44,6 +44,7 @@ function ToolDeats({ deats, handleHide }) {
     location: null,
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [currentPanel, setCurrentPanel] = useState("1st");
   const [dropdownOpen1, setDropdownOpen1] = useState(false);
   const [dropdownOpen2, setDropdownOpen2] = useState(false);
@@ -58,6 +59,8 @@ function ToolDeats({ deats, handleHide }) {
   const handleNext = () => {
     if (currentPanel === "1st" && formData.pickupMethod && formData.duration) {
       setCurrentPanel("2nd");
+    } else {
+      alert("Please select both duration and pickup method to proceed.");
     }
   };
 
@@ -97,7 +100,7 @@ function ToolDeats({ deats, handleHide }) {
           handleChange("location", clientLocation);
           handleLocationCharge(clientLocation);
         },
-        (error) => console.error("Error fetching location:", error)
+        (error) => console.error("Error fetching location:", error),
       );
     } else {
       console.error("Geolocation is not supported by this browser.");
@@ -105,30 +108,40 @@ function ToolDeats({ deats, handleHide }) {
   };
 
   const handleSubmit = () => {
-    if (formData.pickupMethod === "Home Delivery" && formData.charge === 0) {
+    const { name, phone, email, duration, pickupMethod } = formData;
+
+    // 🔴 Basic validation
+    if (!name || !phone || !email || !duration || !pickupMethod) {
+      alert("Please fill in all required fields before submitting.");
+      return;
+    }
+
+    if (pickupMethod === "Home Delivery" && formData.charge === 0) {
       alert("Please select a location for delivery.");
       return;
     }
 
     const updatedFormData = {
       ...formData,
-      charge: formData.pickupMethod === "Self Pickup" ? 0 : formData.charge,
-      location:
-        formData.pickupMethod === "Self Pickup" ? "" : formData.location,
+      charge: pickupMethod === "Self Pickup" ? 0 : formData.charge,
+      location: pickupMethod === "Self Pickup" ? "" : formData.location,
     };
+
+    // 🟡 Inform user that submission has started
+    setIsSubmitting(true);
+    alert("Please wait while your reservation is being processed...");
 
     axios
       .post(baseUrl + "rents", updatedFormData)
       .then((response) => {
         console.log("Reservation successful:", response.data);
 
-        // Generate email content
         const emailHtml = generateEmailHtml(
           updatedFormData.name,
           "this is a test message",
-          ""
+          "",
         );
-        // Send email
+
         return axios.post(baseUrl + "mail", {
           subject: "this is a test",
           htmlContent: emailHtml,
@@ -136,16 +149,19 @@ function ToolDeats({ deats, handleHide }) {
           message: `A reservation for ${deats.name} has been confirmed. The requested duration is ${updatedFormData.duration}.`,
         });
       })
-      .then((emailResponse) => {
-        alert("Reservation successful. An email has been sent to you.");
+      .then(() => {
+        alert("✅ Reservation complete! A confirmation email has been sent.");
       })
       .catch((error) => {
         console.error("Error processing request:", error);
+        alert("❌ Something went wrong. Please try again.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
 
     console.log("Reservation Details:", updatedFormData);
   };
-
   return (
     <motion.div
       className="modal-back"
@@ -249,7 +265,7 @@ function ToolDeats({ deats, handleHide }) {
                             >
                               {duration}
                             </DropdownItem>
-                          )
+                          ),
                         )}
                       </DropdownMenu>
                     </Dropdown>
@@ -401,10 +417,15 @@ function ToolDeats({ deats, handleHide }) {
                     <p>Delivery Charge: ${formData.charge}</p>
                     <div
                       className="butt"
-                      style={{ display: "inline-block" }}
-                      onClick={handleSubmit}
+                      style={{
+                        display: "inline-block",
+                        opacity: isSubmitting ? 0.6 : 1,
+                        pointerEvents: isSubmitting ? "none" : "auto",
+                        cursor: isSubmitting ? "not-allowed" : "pointer",
+                      }}
+                      onClick={!isSubmitting ? handleSubmit : undefined}
                     >
-                      Confirm Reservation
+                      {isSubmitting ? "Submitting..." : "Confirm Reservation"}
                     </div>
                     <div
                       className="butt"
