@@ -129,7 +129,7 @@ const Estimation = () => {
                       </div>
                     ))
                   ) : (
-                    <p>No services selected.</p>
+                    <p className="text-center pt-1">No services selected</p>
                   )}
                 </div>
               </div>

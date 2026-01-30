@@ -65,8 +65,10 @@ const AppointmentForm = () => {
 
     try {
       setIsSubmitting(true);
+      if (image) {
+        alert("Please wait, your image is being uploaded...");
+      }
       setUploadProgress(0);
-      alert("Please wait, your image is being uploaded...");
 
       const response = await axios.post(baseUrl + "contact", data, {
         headers: {
@@ -223,7 +225,9 @@ const AppointmentForm = () => {
                   </Col>
                 </Row>
               )}
-              {isSubmitting && <p>Uploading image... {uploadProgress}%</p>}
+              {isSubmitting && image && (
+                <p>Uploading image... {uploadProgress}%</p>
+              )}
               <div
                 className="butt"
                 style={{
