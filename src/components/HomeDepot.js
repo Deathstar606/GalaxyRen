@@ -544,6 +544,7 @@ function HomeD({ tools }) {
                 display: "flex",
                 justifyContent: "center",
                 padding: "2.5px",
+                margin: "10px",
               }}
             >
               <motion.div
