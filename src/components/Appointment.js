@@ -85,6 +85,7 @@ const AppointmentForm = () => {
 
     try {
       setIsSubmitting(true);
+      setUploadProgress(0);
       if (formData.mainImg) {
         alert("Please wait, your image is being uploaded...");
         const mainImgUrl = formData.mainImg
@@ -92,8 +93,6 @@ const AppointmentForm = () => {
           : null;
         requestData.mainImgUrl = mainImgUrl;
       }
-
-      setUploadProgress(0);
 
       const response = await axios.post(baseUrl + "contact", requestData, {
         headers: {
