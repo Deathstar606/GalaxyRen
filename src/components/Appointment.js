@@ -16,6 +16,28 @@ import { baseUrl } from "../shared/baseurl";
 import axios from "axios";
 import contact from "../images/contact2.jpg";
 
+const uploadToCloudinary = async (file) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("upload_preset", "galaxyReno_up"); // Replace with your Cloudinary upload preset
+  formData.append("folder", "galaxyReno/contacts");
+
+  try {
+    const response = await fetch(
+      "https://api.cloudinary.com/v1_1/drliblpx7/image/upload",
+      {
+        method: "POST",
+        body: formData,
+      },
+    );
+    const data = await response.json();
+    return data.secure_url; // Return the uploaded image URL
+  } catch (error) {
+    console.error("Cloudinary Upload Error:", error);
+    return null;
+  }
+};
+
 const AppointmentForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -25,7 +47,6 @@ const AppointmentForm = () => {
     description: "",
   });
 
-  const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,8 +61,8 @@ const AppointmentForm = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
-    setImage(file);
     setImagePreview(URL.createObjectURL(file));
+    setFormData({ ...formData, mainImg: file });
   };
 
   const handleSubmit = async (e) => {
@@ -54,25 +75,29 @@ const AppointmentForm = () => {
       return;
     }
 
-    const data = new FormData();
-    for (const key in formData) {
-      data.append(key, formData[key]);
-    }
-
-    if (image) {
-      data.append("image", image);
-    }
+    const requestData = {
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      address: formData.address,
+      description: formData.description,
+    };
 
     try {
       setIsSubmitting(true);
-      if (image) {
+      if (formData.mainImg) {
         alert("Please wait, your image is being uploaded...");
+        const mainImgUrl = formData.mainImg
+          ? await uploadToCloudinary(formData.mainImg)
+          : null;
+        requestData.mainImgUrl = mainImgUrl;
       }
+
       setUploadProgress(0);
 
-      const response = await axios.post(baseUrl + "contact", data, {
+      const response = await axios.post(baseUrl + "contact", requestData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
         },
         onUploadProgress: (progressEvent) => {
           const percent = Math.round(
@@ -225,9 +250,7 @@ const AppointmentForm = () => {
                   </Col>
                 </Row>
               )}
-              {isSubmitting && image && (
-                <p>Uploading image... {uploadProgress}%</p>
-              )}
+              {isSubmitting && <p>Uploading image... {uploadProgress}%</p>}
               <div
                 className="butt"
                 style={{
