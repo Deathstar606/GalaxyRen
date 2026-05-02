@@ -10,6 +10,7 @@ import AppointmentForm from "./Appointment";
 import Estimation from "./Estimation";
 import CatDeat from "./CatDeats";
 import SubCat from "./CategoryWSub";
+import ClientDashboard from "./ClientDashboard";
 import Admin from "./Admin";
 import Footer from "./Footer";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
@@ -89,6 +90,7 @@ const Main = (props) => {
             <Route path="/home/subcat" element={<CategoriesWsub />} />
             <Route path="/home/aboutus" element={<About />} />
             <Route path="/home/contactus" element={<AppointmentForm />} />
+            <Route path="/home/clientdash" element={<ClientDashboard />} />
             <Route
               path="/home/admin"
               element={

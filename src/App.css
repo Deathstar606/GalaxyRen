@@ -1,6 +1,6 @@
 /*Starts Here*/
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .logo {
@@ -27,6 +27,13 @@ body {
 .nav-c {
   position: relative;
   background-color: #ffffff;
+}
+
+@media screen and (max-width: 1365px) {
+  .nav-c {
+    max-width: 90% !important;
+    min-width: 90% !important;
+  }
 }
 
 .nav-suffer {
@@ -178,7 +185,7 @@ body {
 .butt:hover {
   color: #d8d9da;
   background-color: #00084c;
-  border-color: #00084c
+  border-color: #00084c;
 }
 
 .home-butt .butt {
@@ -195,7 +202,7 @@ body {
   border-color: #003399;
 }
 
-.butt::before{
+.butt::before {
   content: "";
   position: absolute;
   left: 0;
@@ -206,11 +213,11 @@ body {
 }
 
 .jumbotron {
-  height: 100vh; 
-  padding:120px 0px 100px 0px;
+  height: 100vh;
+  padding: 120px 0px 100px 0px;
   background-color: #353839;
-  margin:0px auto;
-  color: #F1593A;
+  margin: 0px auto;
+  color: #f1593a;
 }
 
 .section-hero-data {
@@ -220,9 +227,9 @@ body {
 }
 
 .headerdec {
-  text-decoration:underline;
+  text-decoration: underline;
   text-decoration-thickness: 2px;
-  text-decoration-color: #F1593A;
+  text-decoration-color: #f1593a;
 }
 
 .animeY {
@@ -245,8 +252,8 @@ body {
 
 .swiper-button-next,
 .swiper-button-prev {
-  top: 90%;  /* Center vertically */
-  transform: translateY(-50%);  /* Adjust to exact center */
+  top: 90%; /* Center vertically */
+  transform: translateY(-50%); /* Adjust to exact center */
 }
 
 .swiper-pagination {

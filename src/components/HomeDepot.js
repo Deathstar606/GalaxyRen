@@ -136,6 +136,22 @@ function ToolDeats({ deats, handleHide }) {
       .then((response) => {
         console.log("Reservation successful:", response.data);
 
+        const existingRentals =
+          JSON.parse(localStorage.getItem("clientRentals")) || [];
+
+        const newRental = {
+          _id: response.data._id,
+          toolId: updatedFormData.toolId,
+          name: updatedFormData.name, // The client's name
+          trackingStatus: "pending", // Default status for new rentals
+          duration: updatedFormData.duration,
+          pickupMethod: updatedFormData.pickupMethod,
+        };
+        localStorage.setItem(
+          "clientRentals",
+          JSON.stringify([...existingRentals, newRental]),
+        );
+
         const emailHtml = generateEmailHtml(
           updatedFormData.name,
           "this is a test message",
@@ -148,6 +164,8 @@ function ToolDeats({ deats, handleHide }) {
           email: updatedFormData.email,
           message: `A reservation for ${deats.name} has been confirmed. The requested duration is ${updatedFormData.duration}.`,
         });
+
+        console.log("Reservation successful:", response.data);
       })
       .then(() => {
         alert("✅ Reservation complete! A confirmation email has been sent.");

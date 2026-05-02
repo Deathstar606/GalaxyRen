@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Row,
   Col,
@@ -13,14 +13,64 @@ import {
   CardBody,
   CardTitle,
   CardText,
-  Badge,
 } from "reactstrap";
 import ServiceForm from "../Admin Forms/ServiceForm";
 import ToolsForm from "../Admin Forms/ToolsForm";
+import AdminTrackButton from "../Admin Forms/AdminTrackButton";
 import { baseUrl } from "../shared/baseurl";
 import axios from "axios";
 
+import io from "socket.io-client";
+
+const socket = io("http://localhost:9000");
+
+const updateTrackingStatus = async (rentId, status) => {
+  try {
+    await fetch(`${baseUrl}rents/${rentId}/trackstat`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ trackingStatus: status }),
+    });
+
+    // Refresh reservations after update
+    //props.fetchReservations();
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 const Admin = (props) => {
+  const [credentials, setCredentials] = useState({
+    username: "",
+    password: "",
+  });
+  const [activeTab, setActiveTab] = useState("messages");
+
+  useEffect(() => {
+    const watchId = navigator.geolocation.watchPosition(
+      async (pos) => {
+        const latitude = pos.coords.latitude;
+        const longitude = pos.coords.longitude;
+
+        const activeRents = props.reservations.reservations.filter(
+          (r) => r.trackingStatus === "in_progress",
+        );
+
+        activeRents.forEach((rent) => {
+          socket.emit("updateLocation", {
+            rentId: rent._id,
+            latitude,
+            longitude,
+          });
+        });
+      },
+      (err) => console.error(err),
+      { enableHighAccuracy: true },
+    );
+
+    return () => navigator.geolocation.clearWatch(watchId);
+  }, [props.reservations.reservations]);
+
   const deleteService = async (id) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this service?",
@@ -47,12 +97,6 @@ const Admin = (props) => {
     }
   };
 
-  const [credentials, setCredentials] = useState({
-    username: "",
-    password: "",
-  });
-  const [activeTab, setActiveTab] = useState("messages");
-
   const services = props.services.services.map((serve, index) => {
     return (
       <Col md={6}>
@@ -75,11 +119,11 @@ const Admin = (props) => {
       </Col>
     );
   });
-
+  ///////Reservations Tab
   const reservations = props.reservations.reservations.map((res, index) => {
     return (
-      <>
-        <Card key={index} className="mb-3 p-3">
+      <React.Fragment key={index}>
+        <Card className="mb-3 p-3">
           <CardBody>
             <CardTitle tag="h5">
               Reservation Date:{" "}
@@ -116,25 +160,16 @@ const Admin = (props) => {
             <CardText>Email: {res.email}</CardText>
             <CardText>Phone: {res.phone}</CardText>
             <CardText>Charge: ${res.charge}</CardText>
-            {res.location &&
-              (typeof res.location === "string" ? (
-                <CardText>Location: {res.location}</CardText>
-              ) : res.location.latitude && res.location.longitude ? (
-                <div style={{ height: "200px", width: "100%" }}>
-                  <iframe
-                    width="100%"
-                    height="200"
-                    frameBorder="0"
-                    scrolling="no"
-                    marginHeight="0"
-                    marginWidth="0"
-                    src={`https://maps.google.com/maps?q=${res.location.latitude},${res.location.longitude}&z=13&output=embed`}
-                  ></iframe>
-                </div>
-              ) : null)}
+
+            {/* INJECTED COMPONENT */}
+            <AdminTrackButton
+              rentId={res._id}
+              initialStatus={res.trackingStatus}
+              updateTrackingStatus={updateTrackingStatus}
+            />
           </CardBody>
         </Card>
-      </>
+      </React.Fragment>
     );
   });
 
@@ -178,12 +213,7 @@ const Admin = (props) => {
 
               {/* Content Section */}
               <Col md={6}>
-                <h4 className="mb-2">
-                  {contact.name}{" "}
-                  <Badge className="ml-1" color="secondary" pill>
-                    Contact
-                  </Badge>
-                </h4>
+                <h4 className="mb-2">{contact.name} </h4>
 
                 <p className="mb-1">
                   <strong>Email:</strong> {contact.email}
