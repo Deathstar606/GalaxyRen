@@ -77,7 +77,7 @@ const Navbar = () => {
   return (
     <Container
       className="nav-c"
-      style={{ maxWidth: clientRentalsCount > 0 ? "65%" : "60%" }}
+      /* style={{ maxWidth: clientRentalsCount > 0 ? "65%" : "60%" }} */
     >
       <div>
         <BootstrapNavbar light expand="md">

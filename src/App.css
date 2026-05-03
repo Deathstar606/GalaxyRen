@@ -5,6 +5,7 @@ body {
 
 .logo {
   padding-top: 12px;
+  padding-right: 12px;
   scale: 1.7;
   width: 150px; /* You can adjust the percentage as needed */
   height: 150px; /* This maintains the image's aspect ratio */
